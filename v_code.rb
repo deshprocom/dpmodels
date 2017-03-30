@@ -28,9 +28,7 @@ class VCode
       vcode_key = vcode_cache_key(type, account)
       vcode_factory ||= ->(*args) { Random.rand(*args) }
       vcode = vcode_factory.call(100_000..999_999).to_s
-      if Rails.env.to_s.eql?('test') || ENV['AC_TEST'].present?
-        vcode = '123456'
-      end
+      vcode = '123456' if Rails.env.to_s.eql?('test') || ENV['AC_TEST'].present?
       Rails.logger.info "VCode: generate vcode #{vcode} for #{type} #{account}"
       Rails.cache.write vcode_key, vcode, expires_in: VCODE_EXPIRE_TIME
       vcode
