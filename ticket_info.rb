@@ -40,4 +40,8 @@ class TicketInfo < ApplicationRecord
   def surplus_entity_ticket
     entity_ticket_number - entity_ticket_sold_number
   end
+
+  def attributes
+    super.merge(surplus_e_ticket: surplus_e_ticket, surplus_entity_ticket: surplus_entity_ticket)
+  end
 end
