@@ -43,6 +43,7 @@ module Constants
     module Race
       TICKET_SOLD_OUT = 1100031
       TICKET_UNSOLD = 1100032
+      TICKET_NO_SELL = 1100033
       AGAIN_BUY = 1100039
       E_TICKET_SOLD_OUT = 1100040
       TICKET_END = 1100038
@@ -107,6 +108,7 @@ module Constants
     Error::File::CREATE_DIR_FAILED => '创建目录失败',
     Error::File::UPLOAD_FAILED => '文件上传失败',
 
+    Error::Race::TICKET_NO_SELL => '该赛事没有售票功能',
     Error::Race::TICKET_SOLD_OUT => '票已卖完',
     Error::Race::TICKET_END => '售票已结束',
     Error::Race::TICKET_UNSOLD => '售票还没开始',
