@@ -17,6 +17,6 @@ class Player < ApplicationRecord
   end
 
   def avatar_path
-    ENV['CMS_PHOTO_PATH'].to_s + avatar.to_s unless avatar.blank?
+    ENV['CMS_PHOTO_PATH'].to_s + avatar.to_s unless avatar.to_s.blank?
   end
 end
