@@ -4,7 +4,7 @@ class Player < ApplicationRecord
   attr_accessor :avatar_path
 
   before_save do
-    self.player_id = SecureRandom.hex(4) if self.created_at.blank?
+    self.player_id = SecureRandom.hex(4) if created_at.blank?
   end
 
   # 上传图片给图片赋值的时候 创建图片路径
