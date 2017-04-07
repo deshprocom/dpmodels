@@ -33,10 +33,12 @@ class Race < ApplicationRecord
   has_many :race_follows
   has_many :tickets
   has_many :race_orders, class_name: PurchaseOrder
+  has_many :sub_races, class_name: 'Race', foreign_key: 'parent_id'
+  belongs_to :parent, class_name: 'Race'
   accepts_nested_attributes_for :ticket_info, update_only: true
   accepts_nested_attributes_for :race_desc, update_only: true
 
-  validates :name, :prize, :logo, presence: true
+  validates :name, :prize, presence: true
   enum status: [:unbegin, :go_ahead, :ended, :closed]
   enum ticket_status: { unsold: 'unsold', selling: 'selling', end: 'end', sold_out: 'sold_out' }
   ransacker :status, formatter: proc { |v| statuses[v] } if ENV['CURRENT_PROJECT'] == 'dpcms'
@@ -58,6 +60,7 @@ class Race < ApplicationRecord
   scope :order_race_list, -> { order(begin_date: :asc).order(end_date: :asc).order(created_at: :asc) }
   scope :seq_desc, -> { order(seq_id: :desc) }
   scope :ticket_sellable, -> { where(ticket_sellable: true) }
+  scope :main, -> { where(parent_id: 0) }
 
   # 获取指定条数的近期赛事 (5条)
   def self.limit_recent_races(numbers = 5)
@@ -90,10 +93,14 @@ class Race < ApplicationRecord
   end
 
   def preview_logo
+    return '' if logo.url.nil?
+
     ENV['CMS_PHOTO_PATH'] + logo.url(:preview)
   end
 
   def big_logo
+    return '' if logo.url.nil?
+
     ENV['CMS_PHOTO_PATH'] + logo.url
   end
 end
