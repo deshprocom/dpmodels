@@ -53,6 +53,7 @@ class Race < ApplicationRecord
     self.seq_id = Services::RaceSequencer.call(self) if begin_date_changed?
   end
 
+  scope :main, -> { where(parent_id: 0) }
   # 默认取已发布的赛事
   default_scope { where(published: true) } unless ENV['CURRENT_PROJECT'] == 'dpcms'
   # 近期赛事
@@ -61,11 +62,10 @@ class Race < ApplicationRecord
   scope :order_race_list, -> { order(begin_date: :asc).order(end_date: :asc).order(created_at: :asc) }
   scope :seq_desc, -> { order(seq_id: :desc) }
   scope :ticket_sellable, -> { where(ticket_sellable: true) }
-  scope :main, -> { where(parent_id: 0) }
 
   # 获取指定条数的近期赛事 (5条)
   def self.limit_recent_races(numbers = 5)
-    recent_races.limit(numbers).order_race_list
+    main.recent_races.limit(numbers).order_race_list
   end
 
   def to_snapshot
@@ -103,5 +103,9 @@ class Race < ApplicationRecord
     return '' if logo.url.nil?
 
     ENV['CMS_PHOTO_PATH'] + logo.url
+  end
+
+  def days
+    (end_date - begin_date).to_i + 1
   end
 end
