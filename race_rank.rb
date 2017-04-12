@@ -14,5 +14,6 @@ class RaceRank < ApplicationRecord
   belongs_to :race
   belongs_to :player
 
+  validates :player_id, presence: true
   default_scope -> { order(ranking: :asc) }
 end
