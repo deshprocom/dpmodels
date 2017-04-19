@@ -14,7 +14,8 @@ class RaceRank < ApplicationRecord
   belongs_to :race
   belongs_to :player
 
-  validates :player_id, presence: true
+  validates :player_id, :ranking, :earning, :score, presence: true
+  validates :player_id, uniqueness: { scope: :race_id }
   default_scope -> { order(ranking: :asc) }
 
   after_create do

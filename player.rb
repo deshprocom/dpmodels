@@ -21,8 +21,10 @@
 class Player < ApplicationRecord
   mount_uploader :avatar, AvatarUploader
   has_many :race_ranks
-
   attr_accessor :avatar_path
+
+  validates :name, :country, presence: true
+  validates :name, uniqueness: { scope: :country }
 
   before_save do
     self.player_id = SecureRandom.hex(4) if created_at.blank?
