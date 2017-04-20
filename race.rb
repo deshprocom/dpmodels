@@ -60,13 +60,13 @@ class Race < ApplicationRecord
   # 近期赛事
   scope :recent_races, -> { where('end_date >= ?', Time.zone.now.end_of_day).where.not(status: [2, 3]) }
   # 排序
-  scope :order_race_list, -> { order(begin_date: :asc).order(end_date: :asc).order(created_at: :asc) }
+  scope :date_asc, -> { order(begin_date: :asc).order(end_date: :asc).order(created_at: :asc) }
   scope :seq_desc, -> { order(seq_id: :desc) }
   scope :ticket_sellable, -> { where(ticket_sellable: true) }
 
   # 获取指定条数的近期赛事 (5条)
   def self.limit_recent_races(numbers = 5)
-    main.recent_races.limit(numbers).order_race_list
+    main.recent_races.limit(numbers).date_asc
   end
 
   def to_snapshot
