@@ -29,7 +29,6 @@ class TicketInfo < ApplicationRecord
     save!
   end
 
-
   def surplus_e_ticket
     e_ticket_number - e_ticket_sold_number
   end
