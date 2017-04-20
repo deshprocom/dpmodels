@@ -36,7 +36,7 @@ class Race < ApplicationRecord
   has_many :race_orders, class_name: PurchaseOrder
   has_many :sub_races, class_name: 'Race', foreign_key: 'parent_id'
   belongs_to :parent, class_name: 'Race', optional: true
-  belongs_to :race_host
+  belongs_to :race_host, optional: true
   accepts_nested_attributes_for :ticket_info, update_only: true
   accepts_nested_attributes_for :race_desc, update_only: true
 
