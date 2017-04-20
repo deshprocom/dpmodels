@@ -36,10 +36,11 @@ class Race < ApplicationRecord
   has_many :race_orders, class_name: PurchaseOrder
   has_many :sub_races, class_name: 'Race', foreign_key: 'parent_id'
   belongs_to :parent, class_name: 'Race', optional: true
+  belongs_to :race_host
   accepts_nested_attributes_for :ticket_info, update_only: true
   accepts_nested_attributes_for :race_desc, update_only: true
 
-  validates :name, :prize, presence: true
+  validates :name, presence: true
   enum status: [:unbegin, :go_ahead, :ended, :closed]
   enum ticket_status: { unsold: 'unsold', selling: 'selling', end: 'end', sold_out: 'sold_out' }
   ransacker :status, formatter: proc { |v| statuses[v] } if ENV['CURRENT_PROJECT'] == 'dpcms'
