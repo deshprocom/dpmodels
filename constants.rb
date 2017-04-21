@@ -22,6 +22,7 @@ module Constants
       DATE_FORMAT_ERROR = 1100005
       NOT_FOUND = 1100006
       SYSTEM_ERROR = 1100007
+      PARAM_VALUE_NOT_ALLOWED = 1100008
     end
 
     module Sign
@@ -90,6 +91,7 @@ module Constants
     Error::Common::DATABASE_ERROR => '数据库错误',
     Error::Common::NOT_FOUND => '找不到指定记录',
     Error::Common::SYSTEM_ERROR => '系统错误',
+    Error::Common::PARAM_VALUE_NOT_ALLOWED => '参数值不在允许范围内',
     Error::Sign::EMAIL_FORMAT_WRONG => '无效的邮箱格式',
     Error::Sign::MOBILE_FORMAT_WRONG => '无效的手机号码',
     Error::Sign::MOBILE_ALREADY_USED => '手机号码已被使用',
