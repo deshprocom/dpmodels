@@ -62,6 +62,7 @@ class Race < ApplicationRecord
   # 排序
   scope :date_asc, -> { order(begin_date: :asc).order(end_date: :asc).order(created_at: :asc) }
   scope :seq_desc, -> { order(seq_id: :desc) }
+  scope :seq_asc, -> { order(seq_id: :asc) }
   scope :ticket_sellable, -> { where(ticket_sellable: true) }
 
   # 获取指定条数的近期赛事 (5条)
