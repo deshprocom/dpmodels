@@ -29,6 +29,10 @@ class TicketInfo < ApplicationRecord
     save!
   end
 
+  def decrement_with_lock!(attribute, by = 1)
+    increment_with_lock!(attribute, -by)
+  end
+
   def surplus_e_ticket
     e_ticket_number - e_ticket_sold_number
   end
