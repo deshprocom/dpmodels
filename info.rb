@@ -1,4 +1,6 @@
 class Info < ApplicationRecord
+  mount_uploader :image, InfoUploader
+
   belongs_to :info_type
   default_scope { where(published: true) } unless ENV['CURRENT_PROJECT'] == 'dpcms'
 
@@ -19,5 +21,11 @@ class Info < ApplicationRecord
 
   def untop!
     update(top: false)
+  end
+
+  def image_thumb
+    return '' if image.url.nil?
+
+    ENV['CMS_PHOTO_PATH'] + image.url(:preview)
   end
 end
