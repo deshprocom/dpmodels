@@ -28,4 +28,10 @@ class Info < ApplicationRecord
 
     ENV['CMS_PHOTO_PATH'] + image.url(:preview)
   end
+
+  def big_image
+    return '' if image.url.nil?
+
+    ENV['CMS_PHOTO_PATH'] + image.url
+  end
 end
