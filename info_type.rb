@@ -1,5 +1,5 @@
 class InfoType < ApplicationRecord
-  has_many :infos
+  has_many :infos, dependent: :destroy
   default_scope { where(published: true) } unless ENV['CURRENT_PROJECT'] == 'dpcms'
 
   def publish!
