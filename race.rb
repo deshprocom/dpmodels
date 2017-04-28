@@ -23,7 +23,7 @@
 class Race < ApplicationRecord
   include TicketNumberCounter
 
-  mount_uploader :logo, PhotoUploader
+  mount_uploader :logo, RacePhotoUploader
 
   # 增加二级查询缓存，缓存过期时间六小时
   second_level_cache(version: 1, expires_in: 6.hours)
