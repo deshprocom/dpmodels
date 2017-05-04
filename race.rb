@@ -98,13 +98,13 @@ class Race < ApplicationRecord
   def preview_logo
     return '' if logo.url.nil?
 
-    ENV['CMS_PHOTO_PATH'] + logo.url(:preview)
+    logo.url(:preview)
   end
 
   def big_logo
     return '' if logo.url.nil?
 
-    ENV['CMS_PHOTO_PATH'] + logo.url
+    logo.url
   end
 
   def days
