@@ -1,0 +1,2 @@
+class RaceSchedule < ApplicationRecord
+end

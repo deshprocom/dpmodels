@@ -1,0 +1,2 @@
+class RaceBlind < ApplicationRecord
+end
