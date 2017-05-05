@@ -55,6 +55,8 @@ class User < ApplicationRecord
   end
 
   def avatar_path
-    ENV['DPAPI_PHOTO_PATH'].to_s + avatar.to_s unless avatar.to_s.blank?
+    return '' if avatar.url.nil?
+
+    avatar.url
   end
 end

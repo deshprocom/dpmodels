@@ -30,12 +30,12 @@ class Info < ApplicationRecord
   def image_thumb
     return '' if image.url.nil?
 
-    ENV['CMS_PHOTO_PATH'] + image.url(:preview)
+    image.url(:preview)
   end
 
   def big_image
     return '' if image.url.nil?
 
-    ENV['CMS_PHOTO_PATH'] + image.url
+    image.url
   end
 end

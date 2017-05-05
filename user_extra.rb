@@ -30,6 +30,8 @@ class UserExtra < ApplicationRecord
   end
 
   def image_path
-    ENV['DPAPI_PHOTO_PATH'].to_s + image.to_s unless image.to_s.blank?
+    return '' if image.url.nil?
+
+    image.url
   end
 end

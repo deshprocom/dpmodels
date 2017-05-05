@@ -40,6 +40,8 @@ class Player < ApplicationRecord
   end
 
   def avatar_path
-    ENV['CMS_PHOTO_PATH'].to_s + avatar.to_s unless avatar.to_s.blank?
+    return '' if avatar.url.nil?
+
+    avatar.url
   end
 end
