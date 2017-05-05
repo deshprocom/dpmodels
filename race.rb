@@ -98,7 +98,7 @@ class Race < ApplicationRecord
   def preview_logo
     return '' if logo.url.nil?
 
-    logo.url(:preview)
+    logo.url(:sm)
   end
 
   def big_logo
