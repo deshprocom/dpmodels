@@ -39,6 +39,7 @@ class Race < ApplicationRecord
   belongs_to :race_host, optional: true
   accepts_nested_attributes_for :ticket_info, update_only: true
   accepts_nested_attributes_for :race_desc, update_only: true
+  has_many :race_schedules
 
   validates :name, presence: true
   enum status: [:unbegin, :go_ahead, :ended, :closed]

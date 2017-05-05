@@ -2,6 +2,10 @@ class Info < ApplicationRecord
   mount_uploader :image, InfoUploader
 
   belongs_to :info_type
+  after_initialize do
+    self.date ||= Date.current
+  end
+
   default_scope { where(published: true) } unless ENV['CURRENT_PROJECT'] == 'dpcms'
 
   scope :published, -> { where(published: true) }
