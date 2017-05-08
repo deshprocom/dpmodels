@@ -32,6 +32,7 @@ class Race < ApplicationRecord
   has_one :ticket_info, dependent: :destroy
   has_many :race_follows
   has_many :race_ranks
+  has_many :race_blinds
   has_many :tickets
   has_many :race_orders, class_name: PurchaseOrder
   has_many :sub_races, class_name: 'Race', foreign_key: 'parent_id'
