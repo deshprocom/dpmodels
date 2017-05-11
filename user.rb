@@ -38,6 +38,7 @@ class User < ApplicationRecord
   has_many :purchase_orders
   has_many :orders, class_name: PurchaseOrder
   has_many :shipping_addresses, -> { order(default: :desc) }
+  has_many :account_change_stats
 
   # 刷新访问时间
   def touch_visit!
