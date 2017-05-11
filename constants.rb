@@ -39,6 +39,7 @@ module Constants
       UNSUPPORTED_RESET_TYPE = 1100021
       UNSUPPORTED_OPTION_TYPE = 1100022
       USER_ALREADY_EXIST = 1100023
+      ACCOUNT_ALREADY_BIND = 1100024
     end
 
     module Race
@@ -104,6 +105,7 @@ module Constants
     Error::Sign::VCODE_TYPE_WRONG => '验证码类型不匹配',
     Error::Sign::UNSUPPORTED_RESET_TYPE => '不支持的重置类型 ',
     Error::Sign::UNSUPPORTED_OPTION_TYPE => '不支持的操作类型 ',
+    Error::Sign::ACCOUNT_ALREADY_BIND => '该账户已被绑定',
 
     Error::File::FORMAT_WRONG => '文件格式有误',
     Error::File::SIZE_TOO_LARGE => '文件大小超过限制',
