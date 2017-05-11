@@ -65,6 +65,7 @@ module Constants
       CERT_NO_FORMAT_WRONG = 1100053
       REAL_NAME_FORMAT_WRONG = 1100054
       CERT_NO_ALREADY_EXIST = 1100055
+      NO_CHANGE_PERMISSION = 1100056
     end
 
     module File
@@ -124,6 +125,7 @@ module Constants
     Error::Account::NO_CERTIFICATION => '用户未实名',
     Error::Account::REAL_NAME_FORMAT_WRONG => '真实姓名格式错误',
     Error::Account::CERT_NO_FORMAT_WRONG => '身份证格式错误',
-    Error::Account::CERT_NO_ALREADY_EXIST => '该用户已实名'
+    Error::Account::CERT_NO_ALREADY_EXIST => '该用户已实名',
+    Error::Account::NO_CHANGE_PERMISSION => '账号一个自然月只能修改一次'
   }.freeze
 end
