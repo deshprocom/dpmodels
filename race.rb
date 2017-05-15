@@ -112,4 +112,8 @@ class Race < ApplicationRecord
   def days
     (end_date - begin_date).to_i + 1
   end
+
+  def main?
+    parent_id.zero?
+  end
 end
