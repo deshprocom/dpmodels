@@ -6,6 +6,10 @@ class Info < ApplicationRecord
     self.date ||= Date.current
   end
 
+  before_save do
+    self.description = ActionController::Base.helpers.strip_tags(description)
+  end
+
   default_scope { where(published: true) } unless ENV['CURRENT_PROJECT'] == 'dpcms'
 
   scope :published, -> { where(published: true) }
