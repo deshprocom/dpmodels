@@ -21,6 +21,14 @@ class UserExtra < ApplicationRecord
   enum status: { init: 'init', pending: 'pending', 'passed': 'passed', 'failed': 'failed' }
   attr_accessor :image_path
 
+  after_update do
+    Notification.notify_certification(self) if status_changed? && after_check_status?
+  end
+
+  def after_check_status?
+    status.in? %w(passed failed)
+  end
+
   def image=(value)
     super
     # rubocop:disable Style/GuardClause:27
