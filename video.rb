@@ -1,5 +1,4 @@
 class Video < ApplicationRecord
-  mount_uploader :video_link, VideoUploader
   mount_uploader :cover_link, VideoCoverUploader
   belongs_to :video_type
 
@@ -38,11 +37,5 @@ class Video < ApplicationRecord
     return '' if cover_link.url.nil?
 
     cover_link.url
-  end
-
-  def video_path
-    return '' if video_link.url.nil?
-
-    video_link.url
   end
 end
