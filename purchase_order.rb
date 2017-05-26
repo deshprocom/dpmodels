@@ -34,6 +34,11 @@ class PurchaseOrder < ApplicationRecord
 
   after_create do
     create_snapshot(race.to_snapshot)
+    Notification.notify_order(self)
+  end
+
+  after_update do
+    Notification.notify_order(self) if status_changed? && !canceled?
   end
 
   scope :formal_order, -> { where.not(status: 'canceled') }
