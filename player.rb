@@ -19,9 +19,12 @@
 +-------------------+--------------+------+-----+---------+----------------+
 =end
 class Player < ApplicationRecord
-  mount_uploader :avatar, AvatarUploader
+  mount_uploader :avatar, PlayerUploader
   has_many :race_ranks
   attr_accessor :avatar_path
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+  after_update :crop_avatar
+
 
   validates :name, :country, presence: true
   validates :name, uniqueness: { scope: :country }
@@ -30,18 +33,12 @@ class Player < ApplicationRecord
     self.player_id = SecureRandom.hex(4) if created_at.blank?
   end
 
-  # 上传图片给图片赋值的时候 创建图片路径
-  def avatar=(value)
-    super
-    # rubocop:disable Style/GuardClause
-    if avatar.file.present? && avatar.file.respond_to?(:path) && File.exist?(avatar.file.path)
-      self.avatar_md5 = Digest::MD5.file(avatar.file.path).hexdigest
-    end
+  def crop_avatar
+    avatar.recreate_versions! if crop_x.present?
   end
 
-  def avatar_path
-    return '' if avatar.url.nil?
-
-    avatar.url
+  def avatar_thumb
+    return '' if avatar.thumb.url.nil?
+    avatar.thumb.url + "?suffix=#{Time.now.to_i}"
   end
 end
