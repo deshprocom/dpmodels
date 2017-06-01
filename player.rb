@@ -21,7 +21,7 @@
 class Player < ApplicationRecord
   mount_uploader :avatar, PlayerUploader
   has_many :race_ranks
-  attr_accessor :avatar_path
+  attr_accessor :avatar_thumb
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
   after_update :crop_avatar
 
