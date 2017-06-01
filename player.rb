@@ -25,7 +25,6 @@ class Player < ApplicationRecord
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
   after_update :crop_avatar
 
-
   validates :name, :country, presence: true
   validates :name, uniqueness: { scope: :country }
 
