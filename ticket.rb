@@ -15,12 +15,8 @@
 =end
 
 class Ticket < ApplicationRecord
+  include TicketNumberCounter
   belongs_to :race
-  belongs_to :user
-
-  scope :valid, -> { where(canceled: false) }
-
-  def self.valid_race_ticket(race_id)
-    where(race_id: race_id).valid
-  end
+  has_many :orders, class_name: PurchaseOrder
+  has_one :ticket_info
 end
