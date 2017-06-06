@@ -20,5 +20,6 @@ class Ticket < ApplicationRecord
   include TicketNumberCounter
 
   belongs_to :race
+  has_many :orders, class_name: PurchaseOrder
   has_one :ticket_info
 end
