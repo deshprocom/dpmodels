@@ -1,26 +1,24 @@
 =begin
-+-----------------+--------------+------+-----+----------+----------------+
-| Field           | Type         | Null | Key | Default  | Extra          |
-+-----------------+--------------+------+-----+----------+----------------+
-| id              | int(11)      | NO   | PRI | NULL     | auto_increment |
-| user_id         | int(11)      | YES  | MUL | NULL     |                |
-| race_id         | int(11)      | YES  | MUL | NULL     |                |
-| ticket_infos_id | int(11)      | YES  | MUL | NULL     |                |
-| ticket_type     | varchar(30)  | YES  |     | e_ticket |                |
-| memo            | varchar(255) | YES  |     | NULL     |                |
-| canceled        | tinyint(1)   | YES  |     | 0        |                |
-| created_at      | datetime     | NO   |     | NULL     |                |
-| updated_at      | datetime     | NO   |     | NULL     |                |
-+-----------------+--------------+------+-----+----------+----------------+
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| id             | int(11)      | NO   | PRI | NULL    | auto_increment |
+| race_id        | int(11)      | YES  | MUL | NULL    |                |
+| title          | varchar(256) | YES  |     | NULL    |                |
+| logo           | varchar(256) | YES  |     | NULL    |                |
+| price          | int(11)      | YES  |     | NULL    |                |
+| original_price | int(11)      | YES  |     | NULL    |                |
+| created_at     | datetime     | NO   |     | NULL    |                |
+| updated_at     | datetime     | NO   |     | NULL    |                |
+| ticket_class   | varchar(255) | YES  |     | race    |                |
+| description    | text         | YES  |     | NULL    |                |
+| status         | varchar(30)  | YES  |     | unsold  |                |
++----------------+--------------+------+-----+---------+----------------+
 =end
 
 class Ticket < ApplicationRecord
+  include TicketNumberCounter
+
   belongs_to :race
-  belongs_to :user
-
-  scope :valid, -> { where(canceled: false) }
-
-  def self.valid_race_ticket(race_id)
-    where(race_id: race_id).valid
-  end
+  has_one :ticket_info
 end

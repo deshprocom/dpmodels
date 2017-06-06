@@ -6,6 +6,6 @@ module TicketNumberCounter
 
   def return_a_e_ticket
     ticket_info.decrement!(:e_ticket_sold_number)
-    update(ticket_status: 'selling') if ticket_status == 'sold_out'
+    update(status: 'selling') if status == 'sold_out'
   end
 end
