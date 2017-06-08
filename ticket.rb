@@ -24,6 +24,6 @@ class Ticket < ApplicationRecord
   has_one :ticket_info
   accepts_nested_attributes_for :ticket_info, update_only: true
 
-  enum ticket_class: { race: 'race', race_extra: 'race_extra' }
   enum status: { unsold: 'unsold', selling: 'selling', end: 'end', sold_out: 'sold_out' }
+  enum ticket_class: { single_ticket: 'single_ticket', package_ticket: 'package_ticket' }
 end
