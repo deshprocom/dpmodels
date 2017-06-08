@@ -22,4 +22,6 @@ class Ticket < ApplicationRecord
   belongs_to :race
   has_many :orders, class_name: PurchaseOrder
   has_one :ticket_info
+
+  enum ticket_class: { single_ticket: 'single_ticket', package_ticket: 'package_ticket' }
 end
