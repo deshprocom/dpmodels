@@ -22,4 +22,8 @@ class Ticket < ApplicationRecord
   belongs_to :race
   has_many :orders, class_name: PurchaseOrder
   has_one :ticket_info
+  accepts_nested_attributes_for :ticket_info, update_only: true
+
+  enum ticket_class: { race: 'race', race_extra: 'race_extra' }
+  enum status: { unsold: 'unsold', selling: 'selling', end: 'end', sold_out: 'sold_out' }
 end

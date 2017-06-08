@@ -14,7 +14,6 @@
 +---------------------------+----------+------+-----+---------+----------------+
 =end
 class TicketInfo < ApplicationRecord
-  belongs_to :race
   belongs_to :ticket
 
   def e_ticket_sold_out?
