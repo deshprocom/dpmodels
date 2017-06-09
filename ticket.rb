@@ -26,4 +26,6 @@ class Ticket < ApplicationRecord
 
   enum status: { unsold: 'unsold', selling: 'selling', end: 'end', sold_out: 'sold_out' }
   enum ticket_class: { single_ticket: 'single_ticket', package_ticket: 'package_ticket' }
+
+  validates :title, :price, :original_price, :ticket_class, presence: true
 end
