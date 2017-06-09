@@ -21,7 +21,7 @@ class Ticket < ApplicationRecord
 
   belongs_to :race
   has_many :orders, class_name: PurchaseOrder
-  has_one :ticket_info
+  has_one :ticket_info, dependent: :destroy
   accepts_nested_attributes_for :ticket_info, update_only: true
 
   enum status: { unsold: 'unsold', selling: 'selling', end: 'end', sold_out: 'sold_out' }

@@ -27,7 +27,6 @@ class Race < ApplicationRecord
   second_level_cache(version: 1, expires_in: 6.hours)
 
   has_one :race_desc, dependent: :destroy
-  has_one :ticket_info, dependent: :destroy
   has_many :race_follows
   has_many :race_ranks
   has_many :race_blinds
@@ -36,7 +35,6 @@ class Race < ApplicationRecord
   has_many :sub_races, class_name: 'Race', foreign_key: 'parent_id'
   belongs_to :parent, class_name: 'Race', optional: true
   belongs_to :race_host, optional: true
-  accepts_nested_attributes_for :ticket_info, update_only: true
   accepts_nested_attributes_for :race_desc, update_only: true
   has_many :race_schedules
 
@@ -93,6 +91,10 @@ class Race < ApplicationRecord
 
   def cancel_sell!
     update(ticket_sellable: false)
+  end
+
+  def sellable!
+    update(ticket_sellable: true)
   end
 
   def preview_logo
