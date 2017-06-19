@@ -24,6 +24,7 @@ class PurchaseOrder < ApplicationRecord
   belongs_to :race
   belongs_to :ticket
   has_one :snapshot, class_name: OrderSnapshot
+  has_many :syslogs, as: :operation, class_name: AdminSysLog
 
   validates :order_number, presence: true
   enum status: { unpaid: 'unpaid', paid: 'paid', completed: 'completed', canceled: 'canceled' }
