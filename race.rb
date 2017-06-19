@@ -13,7 +13,6 @@
 | status          | int(11)      | NO   |     | 0       |                |
 | created_at      | datetime     | NO   |     | NULL    |                |
 | updated_at      | datetime     | NO   |     | NULL    |                |
-| ticket_status   | varchar(30)  | YES  |     | unsold  |                |
 | ticket_price    | int(11)      | YES  |     | 0       |                |
 | published       | tinyint(1)   | YES  |     | 0       |                |
 | ticket_sellable | tinyint(1)   | YES  |     | 1       |                |
@@ -30,7 +29,7 @@ class Race < ApplicationRecord
   has_many :race_follows
   has_many :race_ranks
   has_many :race_blinds
-  has_many :tickets, dependent: :destroy
+  has_many :tickets, -> { order(ticket_class: :desc) }, dependent: :destroy
   has_many :race_orders, class_name: PurchaseOrder
   has_many :sub_races, class_name: 'Race', foreign_key: 'parent_id'
   belongs_to :parent, class_name: 'Race', optional: true
@@ -40,7 +39,6 @@ class Race < ApplicationRecord
 
   validates :name, presence: true
   enum status: [:unbegin, :go_ahead, :ended, :closed]
-  enum ticket_status: { unsold: 'unsold', selling: 'selling', end: 'end', sold_out: 'sold_out' }
   ransacker :status, formatter: proc { |v| statuses[v] } if ENV['CURRENT_PROJECT'] == 'dpcms'
 
   after_initialize do
@@ -115,5 +113,31 @@ class Race < ApplicationRecord
 
   def main?
     parent_id.zero?
+  end
+
+  def ticket_status
+    return 'unsold' if unsold?
+
+    return 'end' if end?
+
+    return 'sold_out' if sold_out?
+
+    'selling'
+  end
+
+  def end?
+    !ticket_sellable && sub_races.ticket_sellable.blank?
+  end
+
+  def unsold?
+    tickets.blank? && sub_tickets.blank?
+  end
+
+  def sold_out?
+    tickets.not_sold_out.blank? && sub_tickets.not_sold_out.blank?
+  end
+
+  def sub_tickets
+    Ticket.where(id: sub_races.ids)
   end
 end

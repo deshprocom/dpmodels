@@ -29,4 +29,6 @@ class Ticket < ApplicationRecord
 
   validates :ticket_class, uniqueness: { scope: :race_id }, if: :single_ticket?
   validates :title, :price, :original_price, :ticket_class, presence: true
+
+  scope :not_sold_out, -> { where.not(status: 'sold_out') }
 end
