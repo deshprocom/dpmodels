@@ -1,6 +1,6 @@
 class Info < ApplicationRecord
   mount_uploader :image, InfoUploader
-  has_one :eng_info
+  has_one :info_en
   belongs_to :info_type
 
   after_initialize do
