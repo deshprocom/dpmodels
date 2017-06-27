@@ -1,7 +1,8 @@
 class Info < ApplicationRecord
   mount_uploader :image, InfoUploader
-
+  has_one :eng_info
   belongs_to :info_type
+
   after_initialize do
     self.date ||= Date.current
   end
