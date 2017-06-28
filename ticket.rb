@@ -31,4 +31,5 @@ class Ticket < ApplicationRecord
   validates :title, :price, :original_price, :ticket_class, presence: true
 
   scope :not_sold_out, -> { where.not(status: 'sold_out') }
+  scope :tradable, -> { where(status: %w(selling sold_out)) }
 end
