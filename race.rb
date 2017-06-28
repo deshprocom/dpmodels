@@ -25,7 +25,6 @@ class Race < ApplicationRecord
   # 增加二级查询缓存，缓存过期时间六小时
   second_level_cache(version: 1, expires_in: 6.hours)
 
-  has_one :race_desc, dependent: :destroy
   has_many :race_follows
   has_many :race_ranks
   has_many :race_blinds
@@ -34,7 +33,10 @@ class Race < ApplicationRecord
   has_many :sub_races, class_name: 'Race', foreign_key: 'parent_id'
   belongs_to :parent, class_name: 'Race', optional: true
   belongs_to :race_host, optional: true
+  has_one :race_desc, dependent: :destroy
   accepts_nested_attributes_for :race_desc, update_only: true
+  has_one :race_en, dependent: :destroy
+  accepts_nested_attributes_for :race_en, update_only: true
   has_many :race_schedules
 
   validates :name, presence: true
