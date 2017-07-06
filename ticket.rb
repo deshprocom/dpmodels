@@ -23,6 +23,8 @@ class Ticket < ApplicationRecord
   has_many :orders, class_name: PurchaseOrder
   has_one :ticket_info, dependent: :destroy
   accepts_nested_attributes_for :ticket_info, update_only: true
+  has_one :ticket_en, dependent: :destroy
+  accepts_nested_attributes_for :ticket_en, update_only: true
 
   enum status: { unsold: 'unsold', selling: 'selling', end: 'end', sold_out: 'sold_out' }
   enum ticket_class: { single_ticket: 'single_ticket', package_ticket: 'package_ticket' }
