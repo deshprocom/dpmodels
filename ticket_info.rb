@@ -20,6 +20,10 @@ class TicketInfo < ApplicationRecord
     e_ticket_sold_number >= e_ticket_number
   end
 
+  def entity_ticket_sold_out?
+    entity_ticket_sold_number >= entity_ticket_number
+  end
+
   def sold_out?
     e_ticket_sold_number >= e_ticket_number && entity_ticket_sold_number >= entity_ticket_number
   end

@@ -47,6 +47,7 @@ module Constants
       TICKET_UNSOLD = 1100032
       TICKET_NO_SELL = 1100033
       AGAIN_BUY = 1100039
+      ENTITY_TICKET_SOLD_OUT = 1100037
       E_TICKET_SOLD_OUT = 1100040
       TICKET_END = 1100038
     end
@@ -119,6 +120,7 @@ module Constants
     Error::Race::TICKET_UNSOLD => '售票还没开始',
     Error::Race::AGAIN_BUY => '您已购买过该票，不允许再次购买',
     Error::Race::E_TICKET_SOLD_OUT => '电子票已售完',
+    Error::Race::ENTITY_TICKET_SOLD_OUT => '实体票已售完',
 
     Error::Order::CANNOT_CANCEL => '当前状态不允许取消订单',
 
