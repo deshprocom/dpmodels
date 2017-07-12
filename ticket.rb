@@ -19,6 +19,9 @@
 class Ticket < ApplicationRecord
   include TicketNumberCounter
 
+  # 增加二级查询缓存，缓存过期时间六小时
+  second_level_cache(version: 1, expires_in: 6.hours)
+
   belongs_to :race
   has_many :orders, class_name: PurchaseOrder
   has_one :ticket_info, dependent: :destroy

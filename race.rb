@@ -138,6 +138,6 @@ class Race < ApplicationRecord
   end
 
   def sub_tickets
-    Ticket.where(id: sub_races.ids)
+    Ticket.where(race_id: sub_races.ids)
   end
 end

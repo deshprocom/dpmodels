@@ -43,10 +43,6 @@ class PurchaseOrder < ApplicationRecord
   end
 
   scope :formal_order, -> { where.not(status: 'canceled') }
-  scope :unpaid, -> { where(status: 'unpaid') }
-  scope :paid, -> { where(status: 'paid') }
-  scope :completed, -> { where(status: 'completed') }
-  scope :canceled, -> { where(status: 'canceled') }
 
   def self.purchased?(user_id, race_id)
     where(user_id: user_id).where(race_id: race_id).formal_order.exists?
