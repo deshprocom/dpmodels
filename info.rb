@@ -1,8 +1,8 @@
 class Info < ApplicationRecord
   mount_uploader :image, InfoUploader
-  has_one :info_en, dependent: :destroy
+  # has_one :info_en, dependent: :destroy
+  # accepts_nested_attributes_for :info_en, allow_destroy: true
   belongs_to :info_type
-  accepts_nested_attributes_for :info_en, allow_destroy: true
 
   after_initialize do
     self.date ||= Date.current

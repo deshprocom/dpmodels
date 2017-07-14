@@ -10,6 +10,7 @@ module Constants
       HTTP_TOKEN_EXPIRED = 804
       HTTP_LOGIN_REQUIRED = 805
       HTTP_ACCESS_FORBIDDEN = 806
+      HTTP_INVALID_HEADER = 807
 
       HTTP_MAX = 899
     end
