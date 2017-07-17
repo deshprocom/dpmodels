@@ -1,8 +1,9 @@
 class Info < ApplicationRecord
   mount_uploader :image, InfoUploader
-  # has_one :info_en, dependent: :destroy
-  # accepts_nested_attributes_for :info_en, allow_destroy: true
+
   belongs_to :info_type
+  has_one :info_en, foreign_key: 'id', dependent: :destroy
+  accepts_nested_attributes_for :info_en, allow_destroy: true
 
   after_initialize do
     self.date ||= Date.current
@@ -10,6 +11,10 @@ class Info < ApplicationRecord
 
   before_save do
     self.description = ActionController::Base.helpers.strip_tags(description)
+  end
+
+  after_update do
+    info_en.save
   end
 
   default_scope { where(published: true) } unless ENV['CURRENT_PROJECT'] == 'dpcms'
