@@ -30,12 +30,12 @@ class Race < ApplicationRecord
   has_many :race_blinds
   has_many :tickets, -> { order(ticket_class: :desc) }, dependent: :destroy
   has_many :race_orders, class_name: PurchaseOrder
-  has_many :sub_races, class_name: 'Race', foreign_key: 'parent_id'
+  has_many :sub_races, class_name: 'Race', foreign_key: :parent_id
   belongs_to :parent, class_name: 'Race', optional: true
   belongs_to :race_host, optional: true
   has_one :race_desc, dependent: :destroy
   accepts_nested_attributes_for :race_desc, update_only: true
-  has_one :race_en, dependent: :destroy
+  has_one :race_en, foreign_key: :id, dependent: :destroy
   accepts_nested_attributes_for :race_en, update_only: true
   has_many :race_schedules
 

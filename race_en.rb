@@ -1,7 +1,3 @@
 class RaceEn < ApplicationRecord
-  belongs_to :race
-
-  before_save do
-    self.description = ActionController::Base.helpers.strip_tags(description)
-  end
+  belongs_to :race, foreign_key: :id
 end

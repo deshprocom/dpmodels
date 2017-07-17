@@ -22,11 +22,15 @@ class Ticket < ApplicationRecord
   # 增加二级查询缓存，缓存过期时间六小时
   second_level_cache(version: 1, expires_in: 6.hours)
 
+  before_save do
+    self.description = ActionController::Base.helpers.strip_tags(description)
+  end
+
   belongs_to :race
   has_many :orders, class_name: PurchaseOrder
   has_one :ticket_info, dependent: :destroy
   accepts_nested_attributes_for :ticket_info, update_only: true
-  has_one :ticket_en, dependent: :destroy
+  has_one :ticket_en, foreign_key: :id, dependent: :destroy
   accepts_nested_attributes_for :ticket_en, update_only: true
 
   enum status: { unsold: 'unsold', selling: 'selling', end: 'end', sold_out: 'sold_out' }
