@@ -14,6 +14,7 @@ class Info < ApplicationRecord
   end
 
   after_update do
+    info_en || build_info_en
     info_en.save
   end
 

@@ -4,6 +4,7 @@ class InfoType < ApplicationRecord
   accepts_nested_attributes_for :info_type_en, allow_destroy: true
 
   after_update do
+    info_type_en || build_info_type_en
     info_type_en.save
   end
 
