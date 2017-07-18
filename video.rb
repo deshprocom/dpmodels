@@ -1,11 +1,16 @@
 class Video < ApplicationRecord
   mount_uploader :cover_link, VideoCoverUploader
   belongs_to :video_type
-  has_one :video_en, dependent: :destroy
+  has_one :video_en, foreign_key: 'id', dependent: :destroy
   accepts_nested_attributes_for :video_en, allow_destroy: true
 
   before_save do
     self.description = ActionController::Base.helpers.strip_tags(description)
+  end
+
+  after_update do
+    video_en || build_video_en
+    video_en.save
   end
 
   default_scope { where(published: true) } unless ENV['CURRENT_PROJECT'] == 'dpcms'
