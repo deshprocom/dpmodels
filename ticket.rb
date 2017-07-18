@@ -27,6 +27,8 @@ class Ticket < ApplicationRecord
   end
   after_update { ticket_en&.save }
 
+  after_update { ticket_en&.save }
+
   belongs_to :race
   has_many :orders, class_name: PurchaseOrder
   has_one :ticket_info, dependent: :destroy
