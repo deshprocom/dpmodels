@@ -25,7 +25,6 @@ class Ticket < ApplicationRecord
   before_save do
     self.description = ActionController::Base.helpers.strip_tags(description)
   end
-  after_update { ticket_en&.save }
 
   after_update { ticket_en&.save }
 
