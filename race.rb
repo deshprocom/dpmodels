@@ -33,11 +33,13 @@ class Race < ApplicationRecord
   has_many :sub_races, class_name: 'Race', foreign_key: :parent_id
   belongs_to :parent, class_name: 'Race', optional: true
   belongs_to :race_host, optional: true
+  has_many :race_schedules
   has_one :race_desc, dependent: :destroy
   accepts_nested_attributes_for :race_desc, update_only: true
+  has_one :race_desc_en, dependent: :destroy
+  accepts_nested_attributes_for :race_desc_en, update_only: true
   has_one :race_en, foreign_key: :id, dependent: :destroy
   accepts_nested_attributes_for :race_en, update_only: true
-  has_many :race_schedules
 
   validates :name, presence: true
   enum status: [:unbegin, :go_ahead, :ended, :closed]
@@ -51,6 +53,8 @@ class Race < ApplicationRecord
   before_save do
     self.seq_id = Services::RaceSequencer.call(self) if begin_date_changed?
   end
+
+  after_update { race_en&.save }
 
   scope :main, -> { where(parent_id: 0) }
   # 默认取已发布的赛事
