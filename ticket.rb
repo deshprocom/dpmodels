@@ -25,6 +25,7 @@ class Ticket < ApplicationRecord
   before_save do
     self.description = ActionController::Base.helpers.strip_tags(description)
   end
+  after_update { ticket_en&.save }
 
   belongs_to :race
   has_many :orders, class_name: PurchaseOrder
