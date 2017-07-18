@@ -3,7 +3,7 @@ class VideoEn < ApplicationRecord
   belongs_to :video, foreign_key: 'id'
 
   before_save do
-    diff_attrs = %w(name description)
+    diff_attrs = %w(name description title_desc)
     assign_attributes video.reload.attributes.reject { |k| attributes[k].present? && k.in?(diff_attrs) }
   end
 end
