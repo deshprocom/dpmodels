@@ -49,7 +49,7 @@ class Ticket < ApplicationRecord
   def preview_logo
     return '' if logo.url.nil?
 
-    logo.url(:sm)
+    logo.url(:sm).to_s
   end
 
   def preview_banner
