@@ -17,6 +17,8 @@
 =end
 
 class Ticket < ApplicationRecord
+  mount_uploader :logo, TicketUploader
+  mount_uploader :banner, TicketUploader
   include TicketNumberCounter
 
   # 增加二级查询缓存，缓存过期时间六小时
@@ -43,4 +45,16 @@ class Ticket < ApplicationRecord
 
   scope :not_sold_out, -> { where.not(status: 'sold_out') }
   scope :tradable, -> { where(status: %w(selling sold_out)) }
+
+  def preview_logo
+    return '' if logo.url.nil?
+
+    logo.url(:sm)
+  end
+
+  def preview_banner
+    return '' if banner.url.nil?
+
+    logo.url(:sm)
+  end
 end
