@@ -41,6 +41,8 @@ class User < ApplicationRecord
   has_many :account_change_stats
   has_many :notifications
 
+  enum status: { basic: 'basic', banned: 'banned' }
+
   # 刷新访问时间
   def touch_visit!
     self.last_visit = Time.zone.now
