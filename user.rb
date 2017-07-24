@@ -40,6 +40,7 @@ class User < ApplicationRecord
   has_many :shipping_addresses, -> { order(default: :desc) }
   has_many :account_change_stats
   has_many :notifications
+  accepts_nested_attributes_for :user_extra, allow_destroy: true
 
   enum status: { basic: 'basic', banned: 'banned' }
 
