@@ -32,12 +32,15 @@ class Player < ApplicationRecord
     self.player_id = SecureRandom.hex(4) if created_at.blank?
   end
 
+  scope :earn_order, -> { order(dpi_total_earning: :desc) }
+
   def crop_avatar
     avatar.recreate_versions! if crop_x.present?
   end
 
   def avatar_thumb
     return '' if avatar.thumb.url.nil?
-    avatar.thumb.url + "?suffix=#{Time.now.to_i}"
+
+    avatar.thumb.url + "?suffix=#{updated_at.to_i}"
   end
 end
