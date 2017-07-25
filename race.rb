@@ -120,17 +120,13 @@ class Race < ApplicationRecord
   end
 
   def ticket_status
-    return 'unsold' if unsold?
+    return 'end' unless ticket_sellable
 
-    return 'end' if end?
+    return 'unsold' if unsold?
 
     return 'sold_out' if sold_out?
 
     'selling'
-  end
-
-  def end?
-    !ticket_sellable && sub_races.ticket_sellable.blank?
   end
 
   def unsold?
