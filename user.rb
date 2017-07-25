@@ -64,4 +64,8 @@ class User < ApplicationRecord
 
     avatar.url
   end
+
+  def is_banned?
+    role.eql?('banned')
+  end
 end
