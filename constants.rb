@@ -68,6 +68,7 @@ module Constants
       REAL_NAME_FORMAT_WRONG = 1100054
       CERT_NO_ALREADY_EXIST = 1100055
       NO_CHANGE_PERMISSION = 1100056
+      ERROR_USER_BAN = 1100057
     end
 
     module File
@@ -129,6 +130,7 @@ module Constants
     Error::Account::REAL_NAME_FORMAT_WRONG => '真实姓名格式错误',
     Error::Account::CERT_NO_FORMAT_WRONG => '身份证格式错误',
     Error::Account::CERT_NO_ALREADY_EXIST => '该用户已实名',
-    Error::Account::NO_CHANGE_PERMISSION => '账号一个自然月只能修改一次'
+    Error::Account::NO_CHANGE_PERMISSION => '账号一个自然月只能修改一次',
+    Error::Account::ERROR_USER_BAN => '您被封禁,无法进行该操作'
   }.freeze
 end
