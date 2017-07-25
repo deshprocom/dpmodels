@@ -11,6 +11,7 @@ module Constants
       HTTP_LOGIN_REQUIRED = 805
       HTTP_ACCESS_FORBIDDEN = 806
       HTTP_INVALID_HEADER = 807
+      HTTP_USER_BAN = 809
 
       HTTP_MAX = 899
     end
@@ -68,7 +69,6 @@ module Constants
       REAL_NAME_FORMAT_WRONG = 1100054
       CERT_NO_ALREADY_EXIST = 1100055
       NO_CHANGE_PERMISSION = 1100056
-      ERROR_USER_BAN = 1100057
     end
 
     module File
@@ -88,6 +88,7 @@ module Constants
     Error::Http::HTTP_TOKEN_EXPIRED => 'access token已失效',
     Error::Http::HTTP_LOGIN_REQUIRED => '需要登录后才可以操作',
     Error::Http::HTTP_ACCESS_FORBIDDEN => '无权访问',
+    Error::Http::HTTP_USER_BAN => '您被封禁,无法进行该操作',
 
     Error::Common::MISSING_PARAMETER => '缺少参数',
     Error::Common::PARAM_FORMAT_ERROR => '参数格式错误',
@@ -130,7 +131,6 @@ module Constants
     Error::Account::REAL_NAME_FORMAT_WRONG => '真实姓名格式错误',
     Error::Account::CERT_NO_FORMAT_WRONG => '身份证格式错误',
     Error::Account::CERT_NO_ALREADY_EXIST => '该用户已实名',
-    Error::Account::NO_CHANGE_PERMISSION => '账号一个自然月只能修改一次',
-    Error::Account::ERROR_USER_BAN => '您被封禁,无法进行该操作'
+    Error::Account::NO_CHANGE_PERMISSION => '账号一个自然月只能修改一次'
   }.freeze
 end
