@@ -43,4 +43,17 @@ class Player < ApplicationRecord
 
     avatar.thumb.url + "?suffix=#{updated_at.to_i}"
   end
+
+  def self.leaderboard
+    @leaderboard ||= PlayerLeaderboard.new.ld
+  end
+
+  after_save :syn_leaderboard_score
+  def syn_leaderboard_score
+    Player.leaderboard.rank_members(id, dpi_total_earning)
+  end
+
+  def ranking
+    Player.leaderboard.rank_for(id)
+  end
 end
