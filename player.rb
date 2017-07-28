@@ -32,6 +32,8 @@ class Player < ApplicationRecord
     self.player_id = SecureRandom.hex(4) if created_at.blank?
   end
 
+  ransacker :year if ENV['CURRENT_PROJECT'] == 'dpcms'
+
   def crop_avatar
     avatar.recreate_versions! if crop_x.present?
   end
