@@ -33,6 +33,7 @@ class Player < ApplicationRecord
   end
 
   ransacker :year if ENV['CURRENT_PROJECT'] == 'dpcms'
+  scope :earn_order, -> { order(dpi_total_earning: :desc) }
 
   def crop_avatar
     avatar.recreate_versions! if crop_x.present?
@@ -40,6 +41,20 @@ class Player < ApplicationRecord
 
   def avatar_thumb
     return '' if avatar.thumb.url.nil?
-    avatar.thumb.url + "?suffix=#{Time.now.to_i}"
+
+    avatar.thumb.url + "?suffix=#{updated_at.to_i}"
+  end
+
+  def self.leaderboard
+    @leaderboard ||= PlayerLeaderboard.new.ld
+  end
+
+  after_save :syn_leaderboard_score
+  def syn_leaderboard_score
+    Player.leaderboard.rank_members(id, dpi_total_earning)
+  end
+
+  def ranking
+    Player.leaderboard.rank_for(id)
   end
 end
