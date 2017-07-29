@@ -33,6 +33,7 @@ class Player < ApplicationRecord
     self.player_id = SecureRandom.hex(4) if created_at.blank?
   end
 
+  ransacker :year if ENV['CURRENT_PROJECT'] == 'dpcms'
   scope :earn_order, -> { order(dpi_total_earning: :desc) }
 
   def crop_avatar
