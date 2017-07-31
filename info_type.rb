@@ -1,7 +1,7 @@
 class InfoType < ApplicationRecord
   has_many :infos, dependent: :destroy
   has_one :info_type_en, foreign_key: 'id', dependent: :destroy
-  accepts_nested_attributes_for :info_type_en, allow_destroy: true
+  accepts_nested_attributes_for :info_type_en, update_only: true
 
   after_update do
     info_type_en || build_info_type_en
