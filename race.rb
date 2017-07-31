@@ -60,7 +60,7 @@ class Race < ApplicationRecord
   # 默认取已发布的赛事
   default_scope { where(published: true) } unless ENV['CURRENT_PROJECT'] == 'dpcms'
   # 近期赛事
-  scope :recent_races, -> { where('end_date >= ?', Time.zone.now.end_of_day).where.not(status: [2, 3]) }
+  scope :recent_races, -> { where('end_date >= ?', Date.current).where.not(status: [2, 3]) }
   # 排序
   scope :date_asc, -> { order(begin_date: :asc).order(end_date: :asc).order(created_at: :asc) }
   scope :seq_desc, -> { order(seq_id: :desc) }
