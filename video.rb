@@ -2,7 +2,7 @@ class Video < ApplicationRecord
   mount_uploader :cover_link, VideoCoverUploader
   belongs_to :video_type
   has_one :video_en, foreign_key: 'id', dependent: :destroy
-  accepts_nested_attributes_for :video_en, allow_destroy: true
+  accepts_nested_attributes_for :video_en, update_only: true
 
   before_save do
     self.description = ActionController::Base.helpers.strip_tags(description)
