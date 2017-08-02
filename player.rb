@@ -51,8 +51,13 @@ class Player < ApplicationRecord
   end
 
   after_save :syn_leaderboard_score
+  after_destroy :remove_leaderboard_member
   def syn_leaderboard_score
     Player.leaderboard.rank_members(id, dpi_total_earning)
+  end
+
+  def remove_leaderboard_member
+    Player.leaderboard.remove_member id
   end
 
   def ranking
