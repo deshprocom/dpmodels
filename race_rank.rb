@@ -18,22 +18,24 @@ class RaceRank < ApplicationRecord
   validates :player_id, uniqueness: { scope: :race_id }
   default_scope -> { order(ranking: :asc) }
 
-  after_create do
-    player.increment!(:dpi_total_earning, earning) if earning.positive?
-    player.increment!(:dpi_total_score, score) if score.positive?
-  end
+  # after_create do
+  #   player.increment!(:dpi_total_earning, earning) if earning.positive?
+  #   player.increment!(:dpi_total_score, score) if score.positive?
+  # end
 
   after_destroy do
     player.decrement!(:dpi_total_earning, earning) if earning.positive?
     player.decrement!(:dpi_total_score, score) if score.positive?
+    player.syn_leaderboard_score
   end
 
-  after_update do
+  after_save do
     if player_id == player_id_was
       update_player_data
     else
       replace_player_data
     end
+    player.syn_leaderboard_score
   end
 
   def update_player_data
@@ -47,8 +49,11 @@ class RaceRank < ApplicationRecord
     player.increment!(:dpi_total_earning, earning) if earning.positive?
     player.increment!(:dpi_total_score, score) if score.positive?
 
-    old_player = Player.find player_id_was
+    old_player = Player.find_by id: player_id_was
+    return if old_player.nil?
+
     old_player.decrement!(:dpi_total_earning, earning_was) if earning_was.positive?
     old_player.decrement!(:dpi_total_score, score_was) if score_was.positive?
+    old_player.syn_leaderboard_score
   end
 end
