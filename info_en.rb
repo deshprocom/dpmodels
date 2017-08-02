@@ -5,5 +5,6 @@ class InfoEn < ApplicationRecord
   before_save do
     diff_attrs = %w(title source description)
     assign_attributes info.reload.attributes.reject { |k| attributes[k].present? && k.in?(diff_attrs) }
+    self.description = ActionController::Base.helpers.strip_tags(description)
   end
 end

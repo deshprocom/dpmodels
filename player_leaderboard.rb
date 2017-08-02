@@ -20,6 +20,7 @@ class PlayerLeaderboard
   end
 
   def init_ld_data!
+    redis_store.expire(cache_key, 0)
     @lb.rank_members Player.pluck(:id, @attr)
   end
 
