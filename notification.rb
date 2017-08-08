@@ -31,12 +31,15 @@ class Notification < ApplicationRecord
   end
 
   def self.notify_order_info(order)
-    if order.unpaid?
+    case order.status
+    when 'unpaid'
       %w(下单成功 恭喜您，下单成功！客服将及时与您联系，请保持手机通话畅通)
-    elsif order.paid?
+    when 'paid'
       %w(付款成功 付款成功!)
-    elsif order.completed?
+    when 'delivered'
       ['已发票', "您已成功参与#{order.race.name}，请及时查收预留的收货方式收取赛票，感谢您对扑客的支持！"]
+    when 'completed'
+      ['订单完成', "#{order.race.name}的订单已完成"]
     end
   end
 

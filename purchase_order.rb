@@ -27,7 +27,11 @@ class PurchaseOrder < ApplicationRecord
   has_many :syslogs, as: :operation, class_name: AdminSysLog
 
   validates :order_number, presence: true
-  enum status: { unpaid: 'unpaid', paid: 'paid', completed: 'completed', canceled: 'canceled' }
+  enum status: { unpaid: 'unpaid',
+                 paid: 'paid',
+                 delivered: 'delivered',
+                 completed: 'completed',
+                 canceled: 'canceled' }
 
   after_initialize do
     self.order_number ||= Services::UniqueNumberGenerator.call(PurchaseOrder)
