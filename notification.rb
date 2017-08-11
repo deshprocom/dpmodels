@@ -32,8 +32,6 @@ class Notification < ApplicationRecord
 
   def self.notify_order_info(order)
     case order.status
-    when 'unpaid'
-      %w(下单成功 恭喜您，下单成功！客服将及时与您联系，请保持手机通话畅通)
     when 'paid'
       %w(付款成功 付款成功!)
     when 'delivered'

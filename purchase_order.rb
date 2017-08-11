@@ -39,7 +39,6 @@ class PurchaseOrder < ApplicationRecord
 
   after_create do
     create_snapshot(race.to_snapshot)
-    Notification.notify_order(self)
   end
 
   after_update do
