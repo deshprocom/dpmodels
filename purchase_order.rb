@@ -43,7 +43,7 @@ class PurchaseOrder < ApplicationRecord
   end
 
   after_update do
-    Notification.notify_order(self) if status_changed? && !canceled?
+    Notification.notify_order(self) if status_changed?
   end
 
   scope :formal_order, -> { where.not(status: 'canceled') }
@@ -54,5 +54,13 @@ class PurchaseOrder < ApplicationRecord
 
   def self.purchased_order(user_id, race_id)
     where(user_id: user_id).where(race_id: race_id).formal_order.first
+  end
+
+  def self.unpaid_one_day_ago
+    unpaid.where('created_at < ?', 1.day.ago)
+  end
+
+  def self.delivered_15_days
+    delivered.where('delivery_time < ?', 15.day.ago)
   end
 end

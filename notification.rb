@@ -40,6 +40,8 @@ class Notification < ApplicationRecord
       ['已发票', "您已成功参与#{order.race.name}，请及时查收预留的收货方式收取赛票，感谢您对扑客的支持！"]
     when 'completed'
       ['订单完成', "#{order.race.name}的订单已完成"]
+    when 'canceled'
+      ['订单已取消', "#{order.race.name}的订单已取消"]
     end
   end
 
