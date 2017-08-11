@@ -60,6 +60,8 @@ module Constants
 
     module Order
       CANNOT_CANCEL = 1110000
+      CANNOT_PAY = 1110001
+      PAY_ERROR = 1110002
     end
 
     module Account
@@ -126,6 +128,8 @@ module Constants
     Error::Race::ENTITY_TICKET_SOLD_OUT => '实体票已售完',
 
     Error::Order::CANNOT_CANCEL => '当前状态不允许取消订单',
+    Error::Order::CANNOT_PAY => '当前状态不能支付',
+    Error::Order::PAY_ERROR => '支付不成功',
 
     Error::Account::NO_CERTIFICATION => '用户未实名',
     Error::Account::REAL_NAME_FORMAT_WRONG => '真实姓名格式错误',
