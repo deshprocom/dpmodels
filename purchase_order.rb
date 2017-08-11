@@ -61,6 +61,6 @@ class PurchaseOrder < ApplicationRecord
   end
 
   def self.delivered_15_days
-    delivered.where('delivery_time < ?', 15.day.ago)
+    delivered.where('delivery_time < ?', 15.days.ago)
   end
 end
