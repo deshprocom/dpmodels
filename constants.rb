@@ -79,6 +79,11 @@ module Constants
       CREATE_DIR_FAILED = 1200003
       UPLOAD_FAILED = 1200004
     end
+
+    module Auth
+      AUTH_ERROR = 1300001
+      ALREADY_BIND = 1300002
+    end
   end
 
   ERROR_MESSAGES = {
@@ -135,6 +140,9 @@ module Constants
     Error::Account::REAL_NAME_FORMAT_WRONG => '真实姓名格式错误',
     Error::Account::CERT_NO_FORMAT_WRONG => '身份证格式错误',
     Error::Account::CERT_NO_ALREADY_EXIST => '该用户已实名',
-    Error::Account::NO_CHANGE_PERMISSION => '账号一个自然月只能修改一次'
+    Error::Account::NO_CHANGE_PERMISSION => '账号一个自然月只能修改一次',
+
+    Error::Auth::AUTH_ERROR => '微信授权失败',
+    Error::Auth::ALREADY_BIND => '该微信已绑定过其它账户'
   }.freeze
 end
