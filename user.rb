@@ -62,9 +62,7 @@ class User < ApplicationRecord
   end
 
   def avatar_path
-    return '' if avatar.url.nil?
-
-    avatar.url
+    avatar.url.blank? ? wx_avatar : avatar.url
   end
 
   def banned?
