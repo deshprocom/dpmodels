@@ -95,7 +95,7 @@ module Constants
     Error::Http::HTTP_TOKEN_EXPIRED => 'access token已失效',
     Error::Http::HTTP_LOGIN_REQUIRED => '需要登录后才可以操作',
     Error::Http::HTTP_ACCESS_FORBIDDEN => '无权访问',
-    Error::Http::HTTP_USER_BAN => '您被封禁,无法进行该操作',
+    Error::Http::HTTP_USER_BAN => '该用户已封禁,无法进行该操作',
 
     Error::Common::MISSING_PARAMETER => '缺少参数',
     Error::Common::PARAM_FORMAT_ERROR => '参数格式错误',
