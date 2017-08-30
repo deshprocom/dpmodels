@@ -55,6 +55,6 @@ class Ticket < ApplicationRecord
   def preview_banner
     return '' if banner.url.nil?
 
-    logo.url(:sm)
+    banner.url(:sm)
   end
 end
