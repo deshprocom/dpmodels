@@ -1,6 +1,7 @@
 class InviteCode < ApplicationRecord
   # 生成邀请码，唯一性
   before_create :generate_code
+  validates :name, presence: true, uniqueness: true
 
   protected
 
