@@ -9,14 +9,21 @@ class Notification < ApplicationRecord
 
   def self.notify_order(order)
     title, content = notify_order_info(order)
-    extra_data = { order_number: order.order_number, image: order.race.preview_logo }
     Notification.create(notify_type: 'order',
                         user_id: order.user_id,
                         source: order,
-                        extra_data: extra_data,
-                        color_type: 'success',
+                        extra_data: form_extra_data(order),
+                        color_type: 'success', # 老版本需要用到
                         content: content,
                         title: title)
+  end
+
+  def self.form_extra_data(order)
+    {
+      order_number: order.order_number,
+      order_status: order.status,
+      image: order.race.preview_logo
+    }
   end
 
   def self.notify_certification(user_extra)
