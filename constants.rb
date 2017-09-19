@@ -72,6 +72,11 @@ module Constants
       REAL_NAME_FORMAT_WRONG = 1100054
       CERT_NO_ALREADY_EXIST = 1100055
       NO_CHANGE_PERMISSION = 1100056
+      CERT_TYPE_INVALID = 1100057
+      INVALID_OPTION = 1100058
+      CANNOT_UPDATE = 1100059
+      SINGLE_CERTIFICATION = 1100060
+      CANNOT_UPDATE_CERT_TYPE = 1100061
     end
 
     module File
@@ -143,6 +148,11 @@ module Constants
     Error::Account::CERT_NO_FORMAT_WRONG => '身份证格式错误',
     Error::Account::CERT_NO_ALREADY_EXIST => '该用户已实名',
     Error::Account::NO_CHANGE_PERMISSION => '账号一个自然月只能修改一次',
+    Error::Account::CERT_TYPE_INVALID => '证件类型不正确',
+    Error::Account::INVALID_OPTION => '非法操作',
+    Error::Account::CANNOT_UPDATE => '当前状态不能修改',
+    Error::Account::SINGLE_CERTIFICATION => '您已存在该种证件类型的实名审核，不能再次添加',
+    Error::Account::CANNOT_UPDATE_CERT_TYPE => '证件类型不可修改',
 
     Error::Auth::AUTH_ERROR => '微信授权失败',
     Error::Auth::ALREADY_BIND => '该微信已绑定过其它账户'

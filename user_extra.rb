@@ -15,11 +15,14 @@
 # +------------+--------------+------+-----+------------+----------------+
 # 用户认证信息表
 class UserExtra < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, optional: true
   mount_uploader :image, CardImageUploader
 
   enum status: { init: 'init', pending: 'pending', 'passed': 'passed', 'failed': 'failed' }
   attr_accessor :image_path
+
+  # 过滤掉已删除掉实名认证
+  default_scope { where(is_delete: 0) }
 
   after_update do
     Notification.notify_certification(self) if status_changed? && after_check_status?

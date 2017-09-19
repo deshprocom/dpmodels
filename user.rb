@@ -33,6 +33,8 @@ class User < ApplicationRecord
 
   # 关联关系
   has_one  :user_extra
+  # 新增用户和实名为 多对1 的关系
+  has_many :user_extras
   has_one  :weixin_user
   has_many :race_follows
   has_many :tickets
