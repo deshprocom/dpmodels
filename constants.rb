@@ -77,6 +77,7 @@ module Constants
       CANNOT_UPDATE = 1100059
       SINGLE_CERTIFICATION = 1100060
       CANNOT_UPDATE_CERT_TYPE = 1100061
+      CERT_NO_TWICE = 1100062
     end
 
     module File
@@ -152,6 +153,7 @@ module Constants
     Error::Account::INVALID_OPTION => '非法操作',
     Error::Account::CANNOT_UPDATE => '当前状态不能修改',
     Error::Account::SINGLE_CERTIFICATION => '您已存在该种证件类型的实名审核，不能再次添加',
+    Error::Account::CERT_NO_TWICE => '您已提交过该证件的实名信息，不能再次添加',
     Error::Account::CANNOT_UPDATE_CERT_TYPE => '证件类型不可修改',
 
     Error::Auth::AUTH_ERROR => '微信授权失败',
