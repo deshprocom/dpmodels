@@ -1,0 +1,2 @@
+class ReplyTemplate < ApplicationRecord
+end
