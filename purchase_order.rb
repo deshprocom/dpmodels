@@ -23,6 +23,7 @@ class PurchaseOrder < ApplicationRecord
   belongs_to :user
   belongs_to :race
   belongs_to :ticket
+  belongs_to :user_extra
   has_one :snapshot, class_name: OrderSnapshot
   has_many :syslogs, as: :operation, class_name: AdminSysLog
 
