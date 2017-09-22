@@ -25,6 +25,9 @@ class PurchaseOrder < ApplicationRecord
   belongs_to :ticket
   has_one :snapshot, class_name: OrderSnapshot
   has_many :syslogs, as: :operation, class_name: AdminSysLog
+  has_many :wx_bills, primary_key: :order_number, foreign_key: :out_trade_no
+  has_many :bills, primary_key: :order_number, foreign_key: :order_number
+
 
   validates :order_number, presence: true
   enum status: { unpaid: 'unpaid',
