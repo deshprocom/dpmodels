@@ -42,6 +42,7 @@ class Race < ApplicationRecord
   accepts_nested_attributes_for :race_en, update_only: true
 
   validates :name, presence: true
+  enum required_id_type: { any: 'any', chinese_id: 'chinese_id', 'passport_id': 'passport_id' }
   enum status: [:unbegin, :go_ahead, :ended, :closed]
   ransacker :status, formatter: proc { |v| statuses[v] } if ENV['CURRENT_PROJECT'] == 'dpcms'
 
