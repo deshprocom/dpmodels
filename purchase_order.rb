@@ -29,7 +29,6 @@ class PurchaseOrder < ApplicationRecord
   has_many :wx_bills, primary_key: :order_number, foreign_key: :out_trade_no
   has_many :bills, primary_key: :order_number, foreign_key: :order_number
 
-
   validates :order_number, presence: true
   enum status: { unpaid: 'unpaid',
                  paid: 'paid',
