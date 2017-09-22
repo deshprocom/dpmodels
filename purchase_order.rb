@@ -42,7 +42,7 @@ class PurchaseOrder < ApplicationRecord
   end
 
   after_update do
-    Notification.notify_order(self) if status_changed?
+    Notification.notify_order(self) if status_changed? && !unpaid?
   end
 
   scope :formal_order, -> { where.not(status: 'canceled') }
