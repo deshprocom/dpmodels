@@ -23,6 +23,7 @@ class PurchaseOrder < ApplicationRecord
   belongs_to :user
   belongs_to :race
   belongs_to :ticket
+  belongs_to :user_extra
   has_one :snapshot, class_name: OrderSnapshot
   has_many :syslogs, as: :operation, class_name: AdminSysLog
   has_many :wx_bills, primary_key: :order_number, foreign_key: :out_trade_no
@@ -45,7 +46,7 @@ class PurchaseOrder < ApplicationRecord
   end
 
   after_update do
-    Notification.notify_order(self) if status_changed?
+    Notification.notify_order(self) if status_changed? && !unpaid?
   end
 
   scope :formal_order, -> { where.not(status: 'canceled') }
