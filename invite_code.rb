@@ -9,7 +9,7 @@ class InviteCode < ApplicationRecord
   end
 
   def success_count
-    orders.where.not(status: ['unpaid', 'canceled']).count
+    orders.where.not(status: %w(unpaid canceled)).count
   end
 
   protected
