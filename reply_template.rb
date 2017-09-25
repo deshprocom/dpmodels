@@ -1,5 +1,8 @@
 class ReplyTemplate < ApplicationRecord
-  validates :source, :content, presence: true
-  validates :content, uniqueness: true
+  validates :content, presence: true, uniqueness: true
   belongs_to :template_type, foreign_key: :type_id
+
+  def temp_name
+    template_type&.name
+  end
 end
