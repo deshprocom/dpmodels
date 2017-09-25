@@ -36,6 +36,7 @@ class User < ApplicationRecord
   # 新增用户和实名为 多对1 的关系
   has_many :user_extras
   has_one  :weixin_user
+  has_one  :test_user
   has_many :race_follows
   has_many :tickets
   has_many :purchase_orders
