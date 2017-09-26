@@ -24,7 +24,7 @@ class UserExtra < ApplicationRecord
   # 过滤掉已删除掉实名认证
   default_scope { where(is_delete: 0) }
 
-  validates :real_name, :cert_no, presence: true
+  # validates :real_name, :cert_no, presence: true
 
   after_update do
     Notification.notify_certification(self) if status_changed? && after_check_status?
