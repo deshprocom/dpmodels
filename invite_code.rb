@@ -12,6 +12,10 @@ class InviteCode < ApplicationRecord
     orders.where.not(status: %w(unpaid canceled)).count
   end
 
+  def invite_fee
+    orders.where.not(status: %w(unpaid canceled)).sum('price')
+  end
+
   protected
 
   def generate_code
