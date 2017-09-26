@@ -22,7 +22,7 @@ class UserExtra < ApplicationRecord
   attr_accessor :image_path
 
   # 过滤掉已删除掉实名认证
-  default_scope { where(is_delete: 0) }
+  default_scope { where(is_delete: 0) } unless ENV['CURRENT_PROJECT'] == 'dpcms'
 
   validates :real_name, :cert_no, presence: true
 
