@@ -2,6 +2,19 @@ class InviteCode < ApplicationRecord
   # 生成邀请码，唯一性
   before_create :generate_code
   validates :name, presence: true, uniqueness: true
+  has_many :orders, class_name: 'PurchaseOrder', foreign_key: :invite_code, primary_key: :code
+
+  def order_count
+    orders.count
+  end
+
+  def success_count
+    orders.where.not(status: %w(unpaid canceled)).count
+  end
+
+  def invite_fee
+    orders.where.not(status: %w(unpaid canceled)).sum('price')
+  end
 
   protected
 
