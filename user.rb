@@ -71,4 +71,8 @@ class User < ApplicationRecord
   def banned?
     role.eql?('banned')
   end
+
+  def tester?
+    @is_tester ||= test_user.present?
+  end
 end
