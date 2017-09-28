@@ -36,6 +36,7 @@ class Ticket < ApplicationRecord
 
   enum status: { unsold: 'unsold', selling: 'selling', end: 'end', sold_out: 'sold_out' }
   enum ticket_class: { single_ticket: 'single_ticket', package_ticket: 'package_ticket' }
+  enum role_group: { everyone: 'everyone', tester: 'tester' }
 
   validates :ticket_class, uniqueness: { scope: :race_id }, if: :single_ticket?
   validates :title, :price, :original_price, :ticket_class, presence: true
