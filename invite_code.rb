@@ -4,6 +4,22 @@ class InviteCode < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   has_many :orders, class_name: 'PurchaseOrder', foreign_key: :invite_code, primary_key: :code
 
+  validates :coupon_number, presence: true, if: :check_me
+
+  def check_me
+    if coupon_type.eql?('rebate') && (coupon_number <= 0 || coupon_number >= 100)
+      errors.add(:coupon_number, '输入的数值必须是0 ～ 100之间的整数')
+    end
+    if coupon_type.eql?('reduce') && (coupon_number <= 0)
+      errors.add(:coupon_number, '输入的数值必须是大于0的整数')
+    end
+    true
+  end
+
+  enum coupon_type: { no_discount: 'no_discount',
+                      rebate: 'rebate',
+                      reduce: 'reduce' }
+
   def order_count
     orders.count
   end
