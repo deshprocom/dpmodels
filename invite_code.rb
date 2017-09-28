@@ -3,6 +3,7 @@ class InviteCode < ApplicationRecord
   before_create :generate_code
   validates :name, presence: true, uniqueness: true
   has_many :orders, class_name: 'PurchaseOrder', foreign_key: :invite_code, primary_key: :code
+  has_many :offline_race_orders
 
   validates :coupon_number, presence: true, if: :check_me
 
@@ -20,16 +21,24 @@ class InviteCode < ApplicationRecord
                       rebate: 'rebate',
                       reduce: 'reduce' }
 
-  def order_count
-    orders.count
-  end
-
   def success_count
     orders.where.not(status: %w(unpaid canceled)).count
   end
 
-  def invite_fee
+  def offline_count
+    offline_race_orders.count
+  end
+
+  def total_fee
+    app_fee + offline_fee
+  end
+
+  def app_fee
     orders.where.not(status: %w(unpaid canceled)).sum('price')
+  end
+
+  def offline_fee
+    offline_race_orders.sum('price')
   end
 
   protected
