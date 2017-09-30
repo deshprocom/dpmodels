@@ -2,6 +2,7 @@ class Video < ApplicationRecord
   mount_uploader :cover_link, VideoCoverUploader
   belongs_to :video_type
   has_one :video_en, foreign_key: 'id', dependent: :destroy
+  belongs_to :video_group, optional: true
   accepts_nested_attributes_for :video_en, update_only: true
 
   before_save do
