@@ -4,7 +4,7 @@ class Banner < ApplicationRecord
 
   validates :source_type, presence: true
   validates :source_id, presence: true, if: :internal_source?
-  validates :image, presence: true
+  validates :image, presence: true, if: :new_record?
 
   def internal_source?
     source_type.in? %w(race info video)
