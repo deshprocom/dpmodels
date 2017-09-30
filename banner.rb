@@ -11,13 +11,7 @@ class Banner < ApplicationRecord
   end
 
   def source
-    @source ||= case source_type
-                when 'race' then source_id && Race.find(source_id)
-                when 'info' then source_id && Info.find(source_id)
-                when 'video' then source_id && Video.find(source_id)
-                else
-                  nil
-              end
+    @source ||= source_id && source_type.classify.safe_constantize.find(source_id)
   end
 
   def source_title
