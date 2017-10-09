@@ -1,4 +1,5 @@
 class Info < ApplicationRecord
+  include Publishable
   mount_uploader :image, InfoUploader
 
   belongs_to :info_type
@@ -22,14 +23,6 @@ class Info < ApplicationRecord
 
   scope :published, -> { where(published: true) }
   scope :topped, -> { where(top: true) }
-
-  def publish!
-    update(published: true)
-  end
-
-  def unpublish!
-    update(published: false)
-  end
 
   def top!
     update(top: true)

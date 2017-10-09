@@ -1,4 +1,6 @@
 class InfoType < ApplicationRecord
+  include Publishable
+
   has_many :infos, dependent: :destroy
   has_one :info_type_en, foreign_key: 'id', dependent: :destroy
   accepts_nested_attributes_for :info_type_en, update_only: true
@@ -9,12 +11,4 @@ class InfoType < ApplicationRecord
   end
 
   default_scope { where(published: true) } unless ENV['CURRENT_PROJECT'] == 'dpcms'
-
-  def publish!
-    update(published: true)
-  end
-
-  def unpublish!
-    update(published: false)
-  end
 end

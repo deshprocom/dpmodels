@@ -1,4 +1,6 @@
 class Banner < ApplicationRecord
+  include Publishable
+
   mount_uploader :image, BannerUploader
   attr_accessor :source_title
 

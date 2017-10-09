@@ -1,4 +1,6 @@
 class Video < ApplicationRecord
+  include Publishable
+
   mount_uploader :cover_link, VideoCoverUploader
   belongs_to :video_type
   has_one :video_en, foreign_key: 'id', dependent: :destroy
@@ -18,14 +20,6 @@ class Video < ApplicationRecord
 
   scope :published, -> { where(published: true) }
   scope :topped, -> { where(top: true) }
-
-  def publish!
-    update(published: true)
-  end
-
-  def unpublish!
-    update(published: false)
-  end
 
   def top!
     update(top: true)

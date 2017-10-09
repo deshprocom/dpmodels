@@ -20,6 +20,7 @@
 +-----------------+--------------+------+-----+---------+----------------+
 =end
 class Race < ApplicationRecord
+  include Publishable
   mount_uploader :logo, RacePhotoUploader
 
   # 增加二级查询缓存，缓存过期时间六小时
@@ -82,14 +83,6 @@ class Race < ApplicationRecord
       begin_date:   begin_date,
       end_date:     end_date
     }
-  end
-
-  def publish!
-    update(published: true)
-  end
-
-  def unpublish!
-    update(published: false)
   end
 
   def cancel_sell!
