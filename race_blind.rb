@@ -6,4 +6,5 @@ class RaceBlind < ApplicationRecord
 
   enum blind_type: [:blind_struct, :blind_content]
   scope :level_asc, -> { order(level: :asc).order(blind_type: :asc) }
+  scope :position_asc, -> { order(position: :asc).order(level: :asc) }
 end
