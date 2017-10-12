@@ -9,7 +9,7 @@ class Video < ApplicationRecord
 
   before_save do
     self.description = ActionController::Base.helpers.strip_tags(description)
-    if video_group_id.nil?
+    if video_group.blank?
       create_video_group(name: name)
       self.is_main = true
     end
