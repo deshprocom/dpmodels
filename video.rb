@@ -24,6 +24,7 @@ class Video < ApplicationRecord
 
   scope :published, -> { where(published: true) }
   scope :topped, -> { where(top: true) }
+  scope :position_asc, -> { order(position: :asc).order(created_at: :desc) }
 
   def top!
     update(top: true)
