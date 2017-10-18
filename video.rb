@@ -2,13 +2,17 @@ class Video < ApplicationRecord
   include Publishable
 
   mount_uploader :cover_link, VideoCoverUploader
-  belongs_to :video_type
+  belongs_to :video_type, optional: true
   has_one :video_en, foreign_key: 'id', dependent: :destroy
   belongs_to :video_group, optional: true
   accepts_nested_attributes_for :video_en, update_only: true
 
   before_save do
     self.description = ActionController::Base.helpers.strip_tags(description)
+    if video_group.blank?
+      create_video_group(name: name)
+      self.is_main = true
+    end
   end
 
   after_update do
@@ -20,6 +24,7 @@ class Video < ApplicationRecord
 
   scope :published, -> { where(published: true) }
   scope :topped, -> { where(top: true) }
+  scope :position_asc, -> { order(position: :asc).order(created_at: :desc) }
 
   def top!
     update(top: true)

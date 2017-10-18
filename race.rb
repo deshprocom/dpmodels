@@ -114,7 +114,7 @@ class Race < ApplicationRecord
   end
 
   def ticket_status
-    return 'end' unless ticket_sellable
+    return 'end' if !ticket_sellable && tickets.present?
 
     return 'unsold' if unsold?
 
