@@ -3,7 +3,6 @@ class Headline < ApplicationRecord
 
   belongs_to :source, polymorphic: true
   attr_accessor :source_title
-  validates :title, presence: true
   validates :source_type, presence: true
   validates :source_id, presence: true
 
