@@ -65,6 +65,7 @@ class Race < ApplicationRecord
   scope :recent_races, -> { where('end_date >= ?', Date.current).where.not(status: [2, 3]) }
   # 排序
   scope :date_asc, -> { order(begin_date: :asc).order(end_date: :asc).order(created_at: :asc) }
+  scope :begin_date_desc, -> { order(begin_date: :desc) }
   scope :seq_desc, -> { order(seq_id: :desc) }
   scope :seq_asc, -> { order(seq_id: :asc) }
   scope :ticket_sellable, -> { where(ticket_sellable: true) }
