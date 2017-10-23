@@ -6,4 +6,6 @@ class RaceBlindEn < ApplicationRecord
     attrs = race_blind.reload.attributes.reject { |k| attributes[k].present? && k.in?(diff_attrs) }
     assign_attributes attrs
   end
+
+  enum blind_type: [:blind_struct, :blind_content]
 end
