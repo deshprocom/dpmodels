@@ -6,6 +6,7 @@ class Video < ApplicationRecord
   has_one :video_en, foreign_key: 'id', dependent: :destroy
   belongs_to :video_group, optional: true
   accepts_nested_attributes_for :video_en, update_only: true
+  has_many :race_tag_maps, as: :data
 
   before_save do
     self.description = ActionController::Base.helpers.strip_tags(description)
