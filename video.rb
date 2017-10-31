@@ -21,7 +21,7 @@ class Video < ApplicationRecord
     video_en.save
   end
 
-  default_scope { where(published: true) } unless ENV['CURRENT_PROJECT'] == 'dpcms'
+  default_scope { where(published: true).where(is_show: true) } unless ENV['CURRENT_PROJECT'] == 'dpcms'
 
   scope :published, -> { where(published: true) }
   scope :topped, -> { where(top: true) }
