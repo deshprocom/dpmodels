@@ -4,6 +4,10 @@ class Product < ApplicationRecord
   validates :title, presence: true
   validates :icon, presence: true
 
+  def self.in_category(category)
+    where(category_id: category.self_and_descendants.pluck(:id))
+  end
+
   def preview_icon
     return '' if icon.url.nil?
 
