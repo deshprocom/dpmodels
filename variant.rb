@@ -1,6 +1,6 @@
 class Variant < ApplicationRecord
   belongs_to :product
-  has_many :variant_option_values
+  has_many :variant_option_values, dependent: :destroy
   has_many :option_values, through: :variant_option_values
 
   with_options numericality: { greater_than_or_equal_to: 0, allow_nil: true } do
@@ -10,7 +10,7 @@ class Variant < ApplicationRecord
   validates :sku, uniqueness: true, allow_blank: true
 
   def find_option_value(option_type)
-    option_values.find { |v| v.option_type_id = option_type.id }
+    option_values.find { |v| v.option_type_id.eql? option_type.id }
   end
 
   def build_option_values(values_sku)

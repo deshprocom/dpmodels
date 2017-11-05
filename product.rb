@@ -26,9 +26,16 @@ class Product < ApplicationRecord
     icon.url(:sm)
   end
 
+  # 当增加或删除规格值时，先删除不完整的sku,再进行重建variants
+  def rebuild_variants_for_value_change
+    destroy_incomplete_sku
+    rebuild_variants
+  end
 
-  def master_price
-      master.price
+  # 当删除规格时，并且被删除的规格有规格值时，先删除所有variants,再进行重建variants
+  def rebuild_variants_for_type_delete(type_has_values = false)
+    variants.destroy_all if type_has_values
+    rebuild_variants
   end
 
   def rebuild_variants
@@ -36,9 +43,18 @@ class Product < ApplicationRecord
       sku_option_values = option_values_hash(values_sku)
       next if sku_exists?(sku_option_values)
 
-      variant = variants.create(price: master_price,
+      variant = variants.create(price: master.price,
+                                original_price: master.original_price,
+                                stock: master.stock,
                                 sku_option_values: sku_option_values.to_json)
       variant.build_option_values(values_sku)
+    end
+  end
+
+  def destroy_incomplete_sku
+    current_option_type_size = option_types.size
+    variants.each do |variant|
+      variant.destroy if variant.option_values.size != current_option_type_size
     end
   end
 
@@ -61,6 +77,8 @@ class Product < ApplicationRecord
   # sku集合的生成可由 卡笛尔积的算法来生成
   def values_skus
     values = strict_option_values
+    return [] if values.blank?
+
     return  values[0].product if values.size == 1
 
     values[0].product(*values[1..-1])
