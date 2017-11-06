@@ -5,6 +5,7 @@ class Freight < ApplicationRecord
   def default!
     update(default: true)
   end
+
   def no_default!
     update(default: false)
   end
