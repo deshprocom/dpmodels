@@ -14,7 +14,7 @@ class Variant < ApplicationRecord
   end
 
   def build_option_values(values_sku)
-    values_sku.each {|option_value| build_option_value(option_value)}
+    values_sku.each { |option_value| build_option_value(option_value) }
   end
 
   def build_option_value(option_value)

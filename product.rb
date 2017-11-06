@@ -60,9 +60,7 @@ class Product < ApplicationRecord
 
   def sku_exists?(sku_option_values)
     variants.each do |variant|
-      if variant.sku_option_values_hash == sku_option_values
-        return true
-      end
+      return true if variant.sku_option_values_hash == sku_option_values
     end
 
     false
@@ -79,7 +77,7 @@ class Product < ApplicationRecord
     values = strict_option_values
     return [] if values.blank?
 
-    return  values[0].product if values.size == 1
+    return values[0].product if values.size == 1
 
     values[0].product(*values[1..-1])
   end
@@ -90,5 +88,4 @@ class Product < ApplicationRecord
       type.option_values.to_a
     end.reject(&:blank?)
   end
-
 end
