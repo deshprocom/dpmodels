@@ -1,6 +1,5 @@
 class Product < ApplicationRecord
   mount_uploader :icon, ProductUploader
-
   belongs_to :category
   has_one :master,
           -> { where is_master: true },
@@ -11,6 +10,8 @@ class Product < ApplicationRecord
            -> { where(is_master: false) }
 
   has_many :option_types
+
+  has_many  :images, as: :viewable, dependent: :destroy, class_name: 'ProductImage'
 
   validates :title, presence: true
   validates :icon, presence: true, on: :create
