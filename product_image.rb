@@ -8,4 +8,10 @@ class ProductImage < ApplicationRecord
 
     filename.url(:sm)
   end
+
+  def large
+    return '' if filename.url.nil?
+
+    filename.url(:lg)
+  end
 end
