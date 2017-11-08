@@ -1,5 +1,6 @@
 class Product < ApplicationRecord
   include Publishable
+  include Recommendable
 
   mount_uploader :icon, ProductUploader
   belongs_to :category
