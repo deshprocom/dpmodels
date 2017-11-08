@@ -18,7 +18,7 @@ class Product < ApplicationRecord
   validates :title, presence: true
   validates :icon, presence: true, on: :create
   attr_accessor :root_category
-  enum product_type: { entity: 'entity', virtual: 'virtual'}
+  enum product_type: { entity: 'entity', virtual: 'virtual' }
 
   # 默认取已上架的商品
   default_scope { where(published: true) } unless ENV['CURRENT_PROJECT'] == 'dpcms'
