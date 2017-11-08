@@ -1,7 +1,6 @@
 class InfoEn < ApplicationRecord
   belongs_to :info_type_en, foreign_key: 'info_type_id', optional: true
   belongs_to :info, foreign_key: 'id'
-  # has_many :race_tag_maps, as: :data
 
   before_save do
     diff_attrs = %w(title is_show source description)

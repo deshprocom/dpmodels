@@ -1,5 +1,4 @@
 class RaceTagEn < ApplicationRecord
-  has_many :race_tag_maps
   belongs_to :race_tag, foreign_key: 'id'
 
   before_save do
