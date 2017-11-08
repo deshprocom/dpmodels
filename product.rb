@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  include Publishable
+
   mount_uploader :icon, ProductUploader
   belongs_to :category
   has_one :master,
@@ -16,6 +18,10 @@ class Product < ApplicationRecord
   validates :title, presence: true
   validates :icon, presence: true, on: :create
   attr_accessor :root_category
+  enum product_type: { entity: 'entity', virtual: 'virtual'}
+
+  # 默认取已上架的商品
+  default_scope { where(published: true) } unless ENV['CURRENT_PROJECT'] == 'dpcms'
 
   def self.in_category(category)
     where(category_id: category.self_and_descendants.pluck(:id))
