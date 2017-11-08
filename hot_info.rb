@@ -19,8 +19,6 @@ class HotInfo < ApplicationRecord
   end
 
   def exceed_max_records
-    if HotInfo.count > 50
-      errors.add(:base, '热门资讯的数量最多只能为50条')
-    end
+    errors.add(:base, '热门资讯的数量最多只能为50条') if HotInfo.count > 50
   end
 end
