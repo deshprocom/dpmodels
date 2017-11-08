@@ -5,7 +5,8 @@ class Info < ApplicationRecord
   belongs_to :info_type
   has_one :info_en, foreign_key: 'id', dependent: :destroy
   accepts_nested_attributes_for :info_en, update_only: true
-  has_many :race_tag_maps, as: :data
+  belongs_to :race_tag, optional: true
+  # has_many :race_tag_maps, as: :data
 
   after_initialize do
     self.date ||= Date.current
