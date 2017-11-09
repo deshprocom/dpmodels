@@ -4,6 +4,7 @@ class Product < ApplicationRecord
 
   mount_uploader :icon, ProductUploader
   belongs_to :category
+  belongs_to :freight
   has_one :master,
           -> { where is_master: true },
           class_name: 'Variant'
@@ -22,7 +23,7 @@ class Product < ApplicationRecord
   enum product_type: { entity: 'entity', virtual: 'virtual' }
 
   if ENV['CURRENT_PROJECT'] == 'dpcms'
-    ransacker :by_root_category, formatter: proc{ |v|
+    ransacker :by_root_category, formatter: proc { |v|
       Category.find(v).self_and_descendants.pluck(:id)
     } do |parent|
       parent.table[:category_id]
@@ -31,7 +32,6 @@ class Product < ApplicationRecord
     # 默认取已上架的商品
     default_scope { where(published: true) }
   end
-
 
   def self.in_category(category)
     where(category_id: category.self_and_descendants.pluck(:id))
