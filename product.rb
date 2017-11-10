@@ -22,6 +22,7 @@ class Product < ApplicationRecord
 
   # 默认取已上架的商品
   default_scope { where(published: true) } unless ENV['CURRENT_PROJECT'] == 'dpcms'
+  scope :recommended, -> { where(recommended: true) }
 
   def self.in_category(category)
     where(category_id: category.self_and_descendants.pluck(:id))
