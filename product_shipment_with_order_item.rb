@@ -1,0 +1,2 @@
+class ProductShipmentWithOrderItem < ApplicationRecord
+end
