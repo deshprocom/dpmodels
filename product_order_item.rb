@@ -4,6 +4,6 @@ class ProductOrderItem < ApplicationRecord
 
   after_create do
     total = number * price
-    self.product_order.increment!(:total_product_price, total)
+    product_order.increment!(:total_product_price, total)
   end
 end
