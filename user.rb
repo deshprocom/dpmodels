@@ -40,6 +40,7 @@ class User < ApplicationRecord
   has_many :race_follows
   has_many :tickets
   has_many :purchase_orders
+  has_many :product_orders
   has_many :orders, class_name: PurchaseOrder
   has_many :shipping_addresses, -> { order(default: :desc) }
   has_many :account_change_stats

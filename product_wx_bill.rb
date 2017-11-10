@@ -1,0 +1,2 @@
+class ProductWxBill < ApplicationRecord
+end

@@ -2,6 +2,7 @@ class Variant < ApplicationRecord
   belongs_to :product
   has_many :variant_option_values, dependent: :destroy
   has_many :option_values, through: :variant_option_values
+  has_many :product_order_items
   has_one  :image, as: :viewable, dependent: :destroy, class_name: 'ProductImage'
   accepts_nested_attributes_for :image, update_only: true
 
