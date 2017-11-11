@@ -22,6 +22,8 @@ class Product < ApplicationRecord
   attr_accessor :root_category
   enum product_type: { entity: 'entity', virtual: 'virtual' }
 
+  scope :recommended, -> { where(recommended: true) }
+
   if ENV['CURRENT_PROJECT'] == 'dpcms'
     ransacker :by_root_category, formatter: proc { |v|
       Category.find(v).self_and_descendants.pluck(:id)

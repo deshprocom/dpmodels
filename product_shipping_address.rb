@@ -1,2 +1,2 @@
-class ProductShippingAddress< ApplicationRecord
+class ProductShippingAddress < ApplicationRecord
 end
