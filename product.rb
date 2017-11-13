@@ -35,6 +35,18 @@ class Product < ApplicationRecord
     default_scope { where(published: true) }
   end
 
+  after_save :update_count_to_category
+  after_destroy do
+    Category.decrement_counter(:products_count, category_id)
+  end
+
+  def update_count_to_category
+    return unless category_id_changed?
+
+    Category.increment_counter(:products_count, category_id)
+    Category.decrement_counter(:products_count, category_id_was) unless category_id_was.nil?
+  end
+
   def self.in_category(category)
     where(category_id: category.self_and_descendants.pluck(:id))
   end
