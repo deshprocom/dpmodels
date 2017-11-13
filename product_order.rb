@@ -1,6 +1,6 @@
 class ProductOrder < ApplicationRecord
   belongs_to :user
-  belongs_to :product_shipping_address, optional: true
+  has_one :product_shipping_address
   has_many :product_order_items, dependent: :destroy
 
   before_create do

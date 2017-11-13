@@ -1,5 +1,5 @@
 class ProductShippingAddress < ApplicationRecord
-  has_many :product_orders
+  belongs_to :product_order, optional: true
 
   def full_address
     province.to_s + city.to_s + area.to_s + address.to_s
