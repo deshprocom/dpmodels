@@ -5,4 +5,18 @@ class ProductOrder < ApplicationRecord
   before_create do
     self.order_number = Services::UniqueNumberGenerator.call(ProductOrder)
   end
+
+  enum status: { unpaid: 'unpaid',
+                 paid: 'paid',
+                 delivered: 'delivered',
+                 completed: 'completed',
+                 canceled: 'canceled',
+                 returning: 'returning',
+                 returned: 'returned' }
+
+  def cancel_order(reason = '')
+    update(cancel_reason: reason,
+           cancelled_at: Time.zone.now,
+           status: 'canceled')
+  end
 end
