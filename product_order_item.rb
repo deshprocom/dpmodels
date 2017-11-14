@@ -18,5 +18,6 @@ class ProductOrderItem < ApplicationRecord
   def generate_order_data
     total = number * price
     product_order.increment!(:total_product_price, total)
+    product_order.increment!(:total_price, total)
   end
 end
