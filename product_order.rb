@@ -22,7 +22,7 @@ class ProductOrder < ApplicationRecord
            status: 'canceled')
   end
 
-  def shipped
-    update(status: 'delivered', shipping_status: 'delivered')
+  def delivered!
+    update(status: 'delivered', delivered: true)
   end
 end

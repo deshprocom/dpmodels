@@ -1,7 +1,6 @@
 class ProductOrderItem < ApplicationRecord
   belongs_to :product_order
   belongs_to :variant
-  has_one :product_shipment_with_order_item, dependent: :destroy
 
   before_create :init
   after_create :generate_order_data
@@ -20,5 +19,9 @@ class ProductOrderItem < ApplicationRecord
     total = number * price
     product_order.increment!(:total_product_price, total)
     product_order.increment!(:total_price, total)
+  end
+
+  def refunded!
+    update(refunded: true)
   end
 end
