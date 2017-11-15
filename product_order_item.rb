@@ -1,6 +1,7 @@
 class ProductOrderItem < ApplicationRecord
   belongs_to :product_order
   belongs_to :variant
+  has_one :product_shipment_with_order_item, dependent: :destroy
 
   before_create :init
   after_create :generate_order_data
