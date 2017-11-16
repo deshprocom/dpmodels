@@ -4,7 +4,7 @@ class ProductOrder < ApplicationRecord
   has_many :product_order_items, dependent: :destroy
   has_one :product_shipment, dependent: :destroy
 
-  PAY_STATUSES = %w(unpaid paid failed refund)
+  PAY_STATUSES = %w(unpaid paid failed refund).freeze
   validates :pay_status, inclusion: { in: PAY_STATUSES }
 
   enum status: { unpaid: 'unpaid',
