@@ -10,4 +10,8 @@ class ProductOrderItem < ApplicationRecord
     self.price     ||= variant.price
     self.sku_value ||= variant.text_sku_values
   end
+
+  def refunded!
+    update(refunded: true)
+  end
 end
