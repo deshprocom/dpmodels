@@ -2,6 +2,7 @@ class ProductOrder < ApplicationRecord
   belongs_to :user
   has_one :product_shipping_address, dependent: :destroy
   has_many :product_order_items, dependent: :destroy
+  has_many :product_wx_bills, dependent: :destroy
   has_one :product_shipment, dependent: :destroy
 
   PAY_STATUSES = %w(unpaid paid failed refund).freeze
