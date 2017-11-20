@@ -37,7 +37,7 @@ class Variant < ApplicationRecord
 
   def text_sku_values
     @sku_values_text ||= option_values.map do |option|
-      { option.option_type.name => option.name }
+      "#{option.option_type.name}: #{option.name}"
     end
   end
 end
