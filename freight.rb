@@ -13,4 +13,16 @@ class Freight < ApplicationRecord
   def no_default!
     update(default: false)
   end
+
+  def product_freight(condition, destination)
+    obj = self.fre_special_provinces.where(province_name: destination)
+    return obj.first.fre_special.calculate(condition) if obj.exists?
+    calculate(condition)
+  end
+
+    def calculate(condition)
+      diff = condition - first_cond
+      return first_price if diff <= 0
+      first_price + (diff / add_cond).ceil * add_price
+    end
 end
