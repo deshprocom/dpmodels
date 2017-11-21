@@ -20,10 +20,12 @@ class ProductOrder < ApplicationRecord
     self.order_number = Services::UniqueNumberGenerator.call(ProductOrder)
   end
 
-  def cancel_order(reason = '')
-    update(cancel_reason: reason,
-           cancelled_at: Time.zone.now,
-           status: 'canceled')
+  def cancel_order(reason = '取消订单')
+    return if canceled?
+    update(cancel_reason: reason, cancelled_at: Time.zone.now, status: 'canceled')
+    product_order_items.each do |item|
+      item.variant.stock_increase(item.number)
+    end
   end
 
   def delivered!
