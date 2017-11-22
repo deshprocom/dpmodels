@@ -33,6 +33,6 @@ class ProductOrder < ApplicationRecord
   end
 
   def self.unpaid_half_an_hour
-    unpaid.where('created_at < ?', 15.minutes.ago)
+    unpaid.where('created_at < ?', 30.minutes.ago)
   end
 end
