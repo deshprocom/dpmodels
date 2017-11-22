@@ -118,7 +118,7 @@ class Product < ApplicationRecord
     end.reject(&:blank?)
   end
 
-  def freight_fee(province = nil, number)
+  def freight_fee(province, number)
     product_freight(province, number: number,
                               weight: master.weight,
                               volume: master.volume)
