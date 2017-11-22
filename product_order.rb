@@ -32,6 +32,10 @@ class ProductOrder < ApplicationRecord
     update(status: 'delivered', delivered: true)
   end
 
+  def completed!
+    update(status: 'completed')
+  end
+
   def self.unpaid_half_an_hour
     unpaid.where('created_at < ?', 30.minutes.ago)
   end
