@@ -64,6 +64,7 @@ module Constants
       PAY_ERROR = 1110002
       INVITE_CODE_NOT_EXIST = 1110003
       INVALID_ORDER = 1110004
+      CANNOT_CONFIRM = 1110005
     end
 
     module Account
@@ -145,6 +146,7 @@ module Constants
     Error::Order::PAY_ERROR => '支付不成功',
     Error::Order::INVITE_CODE_NOT_EXIST => '邀请码不存在',
     Error::Order::INVALID_ORDER => '无效的订单',
+    Error::Order::CANNOT_CONFIRM => '当前状态不允许确认收货',
 
     Error::Account::NO_CERTIFICATION => '用户未实名',
     Error::Account::REAL_NAME_FORMAT_WRONG => '真实姓名格式错误',
