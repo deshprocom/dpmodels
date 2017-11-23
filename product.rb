@@ -23,6 +23,7 @@ class Product < ApplicationRecord
   enum product_type: { entity: 'entity', virtual: 'virtual' }
 
   scope :recommended, -> { where(recommended: true) }
+  scope :published, -> { where(published: true) }
 
   if ENV['CURRENT_PROJECT'] == 'dpcms'
     ransacker :by_root_category, formatter: proc { |v|
@@ -30,9 +31,6 @@ class Product < ApplicationRecord
     } do |parent|
       parent.table[:category_id]
     end
-  else
-    # 默认取已上架的商品
-    default_scope { where(published: true) }
   end
 
   after_save :update_count_to_category
@@ -77,7 +75,7 @@ class Product < ApplicationRecord
       variant = variants.create(price: master.price,
                                 original_price: master.original_price,
                                 stock: master.stock,
-                                sku_option_values: sku_option_values.to_json)
+                                sku_option_values: sku_option_values)
       variant.build_option_values(values_sku)
     end
   end
@@ -91,7 +89,7 @@ class Product < ApplicationRecord
 
   def sku_exists?(sku_option_values)
     variants.each do |variant|
-      return true if variant.sku_option_values_hash == sku_option_values
+      return true if variant.sku_option_values == sku_option_values
     end
 
     false
@@ -118,5 +116,11 @@ class Product < ApplicationRecord
       # type.option_values.map { |v|  v.id }
       type.option_values.to_a
     end.reject(&:blank?)
+  end
+
+  def freight_fee(province, number)
+    product_freight(province, number: number,
+                              weight: master.weight,
+                              volume: master.volume)
   end
 end

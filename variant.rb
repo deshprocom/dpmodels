@@ -12,6 +12,8 @@ class Variant < ApplicationRecord
   end
   validates :sku, uniqueness: true, allow_blank: true
 
+  serialize :sku_option_values, JSON
+
   def find_option_value(option_type)
     option_values.find { |v| v.option_type_id.eql? option_type.id }
   end
@@ -25,9 +27,17 @@ class Variant < ApplicationRecord
                                  option_type_id: option_value.option_type_id)
   end
 
-  def sku_option_values_hash
-    return {} if sku_option_values.blank?
+  def stock_increase(by)
+    self.class.update_counters id, stock: by
+  end
 
-    JSON.parse(sku_option_values)
+  def stock_decrease(by)
+    self.class.update_counters id, stock: -by
+  end
+
+  def text_sku_values
+    @sku_values_text ||= option_values.map do |option|
+      "#{option.option_type.name}: #{option.name}"
+    end
   end
 end
