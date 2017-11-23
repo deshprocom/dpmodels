@@ -3,8 +3,8 @@ class Product < ApplicationRecord
   include Recommendable
 
   mount_uploader :icon, ProductUploader
-  belongs_to :category
-  belongs_to :freight
+  belongs_to :category, optional: false
+  belongs_to :freight, optional: false
   has_one :master,
           -> { where is_master: true },
           class_name: 'Variant'
