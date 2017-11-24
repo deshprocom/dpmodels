@@ -23,7 +23,7 @@ class RaceRank < ApplicationRecord
   # end
 
   before_save do
-    self.date = race&.date
+    self.end_date = race&.end_date
   end
 
   after_destroy do
