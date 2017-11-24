@@ -1,10 +1,12 @@
 class Product < ApplicationRecord
   include Publishable
   include Recommendable
+  include ProductCountable
 
   mount_uploader :icon, ProductUploader
   belongs_to :category
   belongs_to :freight
+  has_one :counter, class_name: 'ProductCounter'
   has_one :master,
           -> { where is_master: true },
           class_name: 'Variant'

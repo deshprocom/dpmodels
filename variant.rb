@@ -27,12 +27,12 @@ class Variant < ApplicationRecord
                                  option_type_id: option_value.option_type_id)
   end
 
-  def stock_increase(by)
-    self.class.update_counters id, stock: by
+  def increase_stock(by)
+    increment!(:stock, by)
   end
 
-  def stock_decrease(by)
-    self.class.update_counters id, stock: -by
+  def decrease_stock(by)
+    decrement!(:stock, by)
   end
 
   def text_sku_values
