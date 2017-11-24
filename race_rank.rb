@@ -16,12 +16,15 @@ class RaceRank < ApplicationRecord
 
   validates :player_id, :ranking, :earning, :score, presence: true
   validates :player_id, uniqueness: { scope: :race_id }
-  default_scope -> { order(ranking: :asc) }
 
   # after_create do
   #   player.increment!(:dpi_total_earning, earning) if earning.positive?
   #   player.increment!(:dpi_total_score, score) if score.positive?
   # end
+
+  before_save do
+    self.date = race&.date
+  end
 
   after_destroy do
     player.decrement!(:dpi_total_earning, earning) if earning.positive?

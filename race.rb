@@ -27,7 +27,7 @@ class Race < ApplicationRecord
   second_level_cache(version: 1, expires_in: 6.hours)
 
   has_many :race_follows
-  has_many :race_ranks
+  has_many :race_ranks, -> { order(ranking: :asc) }
   has_many :race_blinds
   has_many :tickets, -> { order(level: :asc) }
   has_many :race_orders, class_name: PurchaseOrder

@@ -20,7 +20,7 @@
 =end
 class Player < ApplicationRecord
   mount_uploader :avatar, PlayerUploader
-  has_many :race_ranks
+  has_many :race_ranks, -> { order(end_date: :desc) }
   has_many :followed_user, -> { order(id: :desc) }, class_name: PlayerFollow
   attr_accessor :avatar_thumb
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
