@@ -65,6 +65,8 @@ module Constants
       INVITE_CODE_NOT_EXIST = 1110003
       INVALID_ORDER = 1110004
       CANNOT_CONFIRM = 1110005
+      CANNOT_REFUND = 1110006
+      INVALID_REFUND_PRICE = 1110007
     end
 
     module Account
@@ -147,6 +149,8 @@ module Constants
     Error::Order::INVITE_CODE_NOT_EXIST => '邀请码不存在',
     Error::Order::INVALID_ORDER => '无效的订单',
     Error::Order::CANNOT_CONFIRM => '当前状态不允许确认收货',
+    Error::Order::CANNOT_REFUND => '该商品不支持退换货',
+    Error::Order::INVALID_REFUND_PRICE => '退款的金额超出实际金额',
 
     Error::Account::NO_CERTIFICATION => '用户未实名',
     Error::Account::REAL_NAME_FORMAT_WRONG => '真实姓名格式错误',
