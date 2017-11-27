@@ -18,6 +18,6 @@ class ProductOrderItem < ApplicationRecord
 
   def refund_record_permit?
     # 不存在退款记录，或者存在退款记录但是为close状态
-    product_refunds.blank? || product_refunds.where(status: ['open', 'passed', 'completed']).blank?
+    product_refunds.blank? || product_refunds.where(status: %w(open passed completed)).blank?
   end
 end
