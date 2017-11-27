@@ -67,6 +67,7 @@ module Constants
       CANNOT_CONFIRM = 1110005
       CANNOT_REFUND = 1110006
       INVALID_REFUND_PRICE = 1110007
+      REFUND_ALREADY_EXIST = 1110008
     end
 
     module Account
@@ -151,6 +152,7 @@ module Constants
     Error::Order::CANNOT_CONFIRM => '当前状态不允许确认收货',
     Error::Order::CANNOT_REFUND => '该商品不支持退换货',
     Error::Order::INVALID_REFUND_PRICE => '退款的金额超出实际金额',
+    Error::Order::REFUND_ALREADY_EXIST => '该商品已存在退款记录',
 
     Error::Account::NO_CERTIFICATION => '用户未实名',
     Error::Account::REAL_NAME_FORMAT_WRONG => '真实姓名格式错误',
