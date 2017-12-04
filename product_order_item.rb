@@ -1,6 +1,7 @@
 class ProductOrderItem < ApplicationRecord
   belongs_to :product_order
   belongs_to :variant
+  has_one :product_refund_detail, dependent: :destroy
 
   before_save :syn_variant
   serialize :sku_value, JSON
@@ -11,7 +12,12 @@ class ProductOrderItem < ApplicationRecord
     self.sku_value ||= variant.text_sku_values
   end
 
-  def refunded!
-    update(refunded: true)
+  def open_refund
+    update(refund_status: 'open')
+  end
+
+  def could_refund?
+    # 只有订单状态为none和close状态的情况可以退款
+    %(none close).include?(refund_status)
   end
 end
