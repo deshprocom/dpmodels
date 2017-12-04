@@ -150,9 +150,9 @@ module Constants
     Error::Order::INVITE_CODE_NOT_EXIST => '邀请码不存在',
     Error::Order::INVALID_ORDER => '无效的订单',
     Error::Order::CANNOT_CONFIRM => '当前状态不允许确认收货',
-    Error::Order::CANNOT_REFUND => '该商品不支持退换货',
+    Error::Order::CANNOT_REFUND => '退换列表有商品不支持7天退换货',
     Error::Order::INVALID_REFUND_PRICE => '退款金额不合法或超出实际金额',
-    Error::Order::REFUND_ALREADY_EXIST => '该商品已存在退款记录',
+    Error::Order::REFUND_ALREADY_EXIST => '退换列表有商品已存在退款记录',
 
     Error::Account::NO_CERTIFICATION => '用户未实名',
     Error::Account::REAL_NAME_FORMAT_WRONG => '真实姓名格式错误',
