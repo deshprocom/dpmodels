@@ -1,12 +1,16 @@
 class ProductOrderItem < ApplicationRecord
   belongs_to :product_order
+  belongs_to :product
   belongs_to :variant
   has_many :product_refund_details, dependent: :destroy
 
-  before_save :syn_variant
+  before_create :syn_variant
   serialize :sku_value, JSON
 
+  enum refund_status: { none_refund: 'none', open: 'open', close: 'close', 'completed': 'completed' }
+
   def syn_variant
+    self.product_id ||= variant.product_id
     self.original_price ||= variant.original_price
     self.price     ||= variant.price
     self.sku_value ||= variant.text_sku_values
