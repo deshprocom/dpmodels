@@ -29,7 +29,7 @@ class ProductOrder < ApplicationRecord
   end
 
   def delivered!
-    update(status: 'delivered', delivered: true)
+    update(status: 'delivered', delivered: true, delivered_time: Time.zone.now)
   end
 
   def completed!
@@ -38,5 +38,10 @@ class ProductOrder < ApplicationRecord
 
   def self.unpaid_half_an_hour
     unpaid.where('created_at < ?', 30.minutes.ago)
+  end
+
+  def could_refund?
+    status.eql?('paid') ||
+      (status.eql?('delivered') && delivered_time.present? && delivered_time > 15.days.ago)
   end
 end

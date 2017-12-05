@@ -68,6 +68,7 @@ module Constants
       CANNOT_REFUND = 1110006
       INVALID_REFUND_PRICE = 1110007
       REFUND_ALREADY_EXIST = 1110008
+      OVER_REFUND_TIME = 1110009
     end
 
     module Account
@@ -153,6 +154,7 @@ module Constants
     Error::Order::CANNOT_REFUND => '退换列表有商品不支持7天退换货',
     Error::Order::INVALID_REFUND_PRICE => '退款金额不合法或超出实际金额',
     Error::Order::REFUND_ALREADY_EXIST => '退换列表有商品已存在退款记录',
+    Error::Order::OVER_REFUND_TIME => '订单已经超过售后保障期',
 
     Error::Account::NO_CERTIFICATION => '用户未实名',
     Error::Account::REAL_NAME_FORMAT_WRONG => '真实姓名格式错误',
