@@ -7,4 +7,20 @@ class ProductRefund < ApplicationRecord
   before_create do
     self.refund_number = ::Digest::MD5.hexdigest(SecureRandom.uuid)
   end
+
+  enum status: { open: 'open', close: 'close', 'completed': 'completed' }
+
+  def close_all!
+    close!
+    product_refund_details.each do |item|
+      item.product_order_item.close!
+    end
+  end
+
+  def complete_all!
+    completed!
+    product_refund_details.each do |item|
+      item.product_order_item.completed!
+    end
+  end
 end
