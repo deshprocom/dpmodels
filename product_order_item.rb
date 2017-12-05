@@ -2,7 +2,7 @@ class ProductOrderItem < ApplicationRecord
   belongs_to :product_order
   belongs_to :product
   belongs_to :variant
-  has_one :product_refund_detail, dependent: :destroy
+  has_many :product_refund_details, dependent: :destroy
 
   before_create :syn_variant
   serialize :sku_value, JSON
