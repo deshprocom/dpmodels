@@ -1,6 +1,6 @@
 class ProductOrderItem < ApplicationRecord
   belongs_to :product_order
-  belongs_to :product
+  belongs_to :product, optional: true
   belongs_to :variant
   has_many :product_refund_details, dependent: :destroy
 

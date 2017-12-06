@@ -1,6 +1,5 @@
 class ProductOrder < ApplicationRecord
   belongs_to :user
-  belongs_to :user_extra
 
   has_one :product_shipping_address, dependent: :destroy
   has_many :product_order_items, dependent: :destroy
