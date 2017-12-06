@@ -7,7 +7,9 @@ class ProductOrderItem < ApplicationRecord
   before_create :syn_variant
   serialize :sku_value, JSON
 
-  enum refund_status: { none_refund: 'none', open: 'open', close: 'close', 'completed': 'completed' }
+  REFUND_STATUSES = %w(none open close completed).freeze
+  validates :refund_status, inclusion: { in: REFUND_STATUSES }
+  # enum refund_status: { none_refund: 'none', open: 'open', close: 'close', 'completed': 'completed' }
 
   def syn_variant
     self.product_id ||= variant.product_id
@@ -23,5 +25,13 @@ class ProductOrderItem < ApplicationRecord
   def could_refund?
     # 只有订单状态为none和close状态的情况可以退款
     %(none close).include?(refund_status)
+  end
+
+  def close!
+    update(refund_status: 'close')
+  end
+
+  def completed!
+    update(refund_status: 'completed')
   end
 end
