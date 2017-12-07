@@ -21,6 +21,8 @@ class ProductOrder < ApplicationRecord
     self.order_number = Services::UniqueNumberGenerator.call(ProductOrder)
   end
 
+  default_scope { where(deleted: false) } unless ENV['CURRENT_PROJECT'] == 'dpcms'
+
   def cancel_order(reason = '取消订单')
     return if canceled?
     update(cancel_reason: reason, cancelled_at: Time.zone.now, status: 'canceled')
@@ -34,7 +36,11 @@ class ProductOrder < ApplicationRecord
   end
 
   def completed!
-    update(status: 'completed')
+    update(status: 'completed', completed_time: Time.zone.now)
+  end
+
+  def deleted!
+    update(deleted: true)
   end
 
   def self.unpaid_half_an_hour
