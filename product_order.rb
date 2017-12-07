@@ -51,4 +51,8 @@ class ProductOrder < ApplicationRecord
     status.eql?('paid') ||
       (status.eql?('delivered') && delivered_time.present? && delivered_time > 15.days.ago)
   end
+
+  def self.delivered_15_days
+    delivered.where('delivered_time < ?', 15.days.ago)
+  end
 end
