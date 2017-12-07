@@ -43,13 +43,16 @@ class ProductOrder < ApplicationRecord
     update(deleted: true)
   end
 
+  def could_delete?
+    canceled? || completed?
+  end
+
   def self.unpaid_half_an_hour
     unpaid.where('created_at < ?', 30.minutes.ago)
   end
 
   def could_refund?
-    status.eql?('paid') ||
-      (status.eql?('delivered') && delivered_time.present? && delivered_time > 15.days.ago)
+    paid? || (delivered? && delivered_time.present? && delivered_time > 15.days.ago)
   end
 
   def self.delivered_15_days
