@@ -21,11 +21,13 @@ class ProductOrder < ApplicationRecord
     self.order_number = Services::UniqueNumberGenerator.call(ProductOrder)
   end
 
+  default_scope { where(deleted: false) } unless ENV['CURRENT_PROJECT'] == 'dpcms'
+
   def cancel_order(reason = '取消订单')
     return if canceled?
     update(cancel_reason: reason, cancelled_at: Time.zone.now, status: 'canceled')
     product_order_items.each do |item|
-      item.variant.stock_increase(item.number)
+      item.variant.increase_stock(item.number)
     end
   end
 
@@ -34,7 +36,15 @@ class ProductOrder < ApplicationRecord
   end
 
   def completed!
-    update(status: 'completed')
+    update(status: 'completed', completed_time: Time.zone.now)
+  end
+
+  def deleted!
+    update(deleted: true)
+  end
+
+  def could_delete?
+    canceled? || completed?
   end
 
   def self.unpaid_half_an_hour
@@ -42,7 +52,10 @@ class ProductOrder < ApplicationRecord
   end
 
   def could_refund?
-    status.eql?('paid') ||
-      (status.eql?('delivered') && delivered_time.present? && delivered_time > 15.days.ago)
+    paid? || (delivered? && delivered_time.present? && delivered_time > 15.days.ago)
+  end
+
+  def self.delivered_15_days
+    delivered.where('delivered_time < ?', 15.days.ago)
   end
 end

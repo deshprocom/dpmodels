@@ -5,7 +5,7 @@ class ProductRefund < ApplicationRecord
   belongs_to :product_order
 
   before_create do
-    self.refund_number = ::Digest::MD5.hexdigest(SecureRandom.uuid)
+    self.refund_number = SecureRandom.hex(8)
   end
 
   enum status: { open: 'open', close: 'close', 'completed': 'completed' }

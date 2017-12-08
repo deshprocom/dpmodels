@@ -70,6 +70,7 @@ module Constants
       INVALID_REFUND_PRICE = 1110007
       REFUND_ALREADY_EXIST = 1110008
       OVER_REFUND_TIME = 1110009
+      CANNOT_DELETE = 1110010
     end
 
     module Account
@@ -157,6 +158,7 @@ module Constants
     Error::Order::INVALID_REFUND_PRICE => '退款金额不合法或超出实际金额',
     Error::Order::REFUND_ALREADY_EXIST => '退换列表有商品已存在退款记录',
     Error::Order::OVER_REFUND_TIME => '订单已经超过售后保障期',
+    Error::Order::CANNOT_DELETE => '订单状态不支持删除',
 
     Error::Account::NO_CERTIFICATION => '用户未实名',
     Error::Account::REAL_NAME_FORMAT_WRONG => '真实姓名格式错误',
