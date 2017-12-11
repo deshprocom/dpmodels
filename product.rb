@@ -77,10 +77,15 @@ class Product < ApplicationRecord
 
       variant = variants.create(price: master.price,
                                 original_price: master.original_price,
-                                stock: master.stock,
+                                stock: 100,
                                 sku_option_values: sku_option_values)
       variant.build_option_values(values_sku)
     end
+    recount_all_stock
+  end
+
+  def recount_all_stock
+    master.update(stock: variants.sum(:stock))
   end
 
   def destroy_incomplete_sku
