@@ -22,6 +22,7 @@ class Product < ApplicationRecord
   validates :title, presence: true
   validates :icon, presence: true, on: :create
   attr_accessor :root_category
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
   enum product_type: { entity: 'entity', virtual: 'virtual' }
 
   scope :recommended, -> { where(recommended: true) }
