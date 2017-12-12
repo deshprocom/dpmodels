@@ -35,6 +35,7 @@ class Race < ApplicationRecord
   belongs_to :parent, class_name: 'Race', optional: true
   belongs_to :race_host, optional: true
   has_many :race_schedules
+  has_one :race_extra, dependent: :destroy
   has_one :race_desc, dependent: :destroy
   accepts_nested_attributes_for :race_desc, update_only: true
   has_one :race_desc_en, dependent: :destroy
