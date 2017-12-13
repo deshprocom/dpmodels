@@ -45,6 +45,7 @@ class User < ApplicationRecord
   has_many :shipping_addresses, -> { order(default: :desc) }
   has_many :account_change_stats
   has_many :notifications
+  has_many :comments
   has_many :followed_players, -> { order(id: :desc) }, class_name: PlayerFollow
   accepts_nested_attributes_for :user_extra, update_only: true
 

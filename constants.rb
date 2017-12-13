@@ -99,6 +99,10 @@ module Constants
       AUTH_ERROR = 1300001
       ALREADY_BIND = 1300002
     end
+
+    module Comment
+      BODY_ERROR = 1400001
+    end
   end
 
   ERROR_MESSAGES = {
@@ -173,6 +177,8 @@ module Constants
     Error::Account::CANNOT_UPDATE_CERT_TYPE => '证件类型不可修改',
 
     Error::Auth::AUTH_ERROR => '微信授权失败',
-    Error::Auth::ALREADY_BIND => '该微信已绑定过其它账户'
+    Error::Auth::ALREADY_BIND => '该微信已绑定过其它账户',
+
+    Error::Comment::BODY_ERROR => '评论或回复的内容不能为空',
   }.freeze
 end
