@@ -6,6 +6,7 @@ class Info < ApplicationRecord
   has_one :info_en, foreign_key: 'id', dependent: :destroy
   accepts_nested_attributes_for :info_en, update_only: true
   belongs_to :race_tag, optional: true
+  has_many :comments, as: :topic, dependent: :destroy
 
   after_initialize do
     self.date ||= Date.current
