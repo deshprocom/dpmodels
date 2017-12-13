@@ -7,6 +7,7 @@ class Video < ApplicationRecord
   belongs_to :video_group, optional: true
   accepts_nested_attributes_for :video_en, update_only: true
   belongs_to :race_tag, optional: true
+  has_many :comments, as: :topic, dependent: :destroy
 
   before_save do
     self.description = ActionController::Base.helpers.strip_tags(description)
