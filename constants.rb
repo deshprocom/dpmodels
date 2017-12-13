@@ -179,6 +179,6 @@ module Constants
     Error::Auth::AUTH_ERROR => '微信授权失败',
     Error::Auth::ALREADY_BIND => '该微信已绑定过其它账户',
 
-    Error::Comment::BODY_ERROR => '评论或回复的内容不能为空',
+    Error::Comment::BODY_ERROR => '评论或回复的内容不能为空'
   }.freeze
 end
