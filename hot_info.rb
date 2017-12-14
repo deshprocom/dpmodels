@@ -3,7 +3,6 @@ class HotInfo < ApplicationRecord
   attr_accessor :source_title
   validates :source_type, presence: true
   validates :source_id, presence: true
-  validate :exceed_max_records
   scope :default_order, -> { order(position: :asc) }
 
   def source_title
@@ -16,9 +15,5 @@ class HotInfo < ApplicationRecord
     return if source.nil?
 
     source.image_thumb
-  end
-
-  def exceed_max_records
-    errors.add(:base, '热门资讯的数量最多只能为50条') if HotInfo.count > 50
   end
 end

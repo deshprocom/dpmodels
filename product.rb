@@ -51,6 +51,12 @@ class Product < ApplicationRecord
     icon.url(:sm)
   end
 
+  def md_icon
+    return '' if icon.url.nil?
+
+    icon.url(:md)
+  end
+
   def freight_fee(province = nil, number = 1)
     freight.product_freight(province, number: number,
                                       weight: master.weight,
