@@ -1,12 +1,15 @@
 class Info < ApplicationRecord
   include Publishable
   mount_uploader :image, InfoUploader
+  include TopicCountable
 
   belongs_to :info_type
   has_one :info_en, foreign_key: 'id', dependent: :destroy
   accepts_nested_attributes_for :info_en, update_only: true
   belongs_to :race_tag, optional: true
   has_many :comments, as: :topic, dependent: :destroy
+  has_many :topic_likes, as: :topic, dependent: :destroy
+  has_one :counter, class_name: 'InfoCounter'
 
   after_initialize do
     self.date ||= Date.current
