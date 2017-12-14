@@ -86,6 +86,8 @@ module Constants
       SINGLE_CERTIFICATION = 1100060
       CANNOT_UPDATE_CERT_TYPE = 1100061
       CERT_NO_TWICE = 1100062
+      USER_SILENCED = 1100063
+      USER_BLOCKED = 1100064
     end
 
     module File
@@ -101,7 +103,8 @@ module Constants
     end
 
     module Comment
-      BODY_ERROR = 1400001
+      BODY_BLANK = 1400001
+      ILLEGAL_KEYWORDS = 1400002
     end
   end
 
@@ -175,10 +178,13 @@ module Constants
     Error::Account::SINGLE_CERTIFICATION => '您已存在该种证件类型的实名审核，不能再次添加',
     Error::Account::CERT_NO_TWICE => '您已提交过该证件的实名信息，不能再次添加',
     Error::Account::CANNOT_UPDATE_CERT_TYPE => '证件类型不可修改',
+    Error::Account::USER_SILENCED => '很抱歉，您已被禁言',
+    Error::Account::USER_BLOCKED => '很抱歉，您已被系统管理员拉入黑名单',
 
     Error::Auth::AUTH_ERROR => '微信授权失败',
     Error::Auth::ALREADY_BIND => '该微信已绑定过其它账户',
 
-    Error::Comment::BODY_ERROR => '评论或回复的内容不能为空'
+    Error::Comment::BODY_BLANK => '评论或回复的内容不能为空',
+    Error::Comment::ILLEGAL_KEYWORDS => '很抱歉，您评论中存在敏感字符'
   }.freeze
 end
