@@ -1,6 +1,7 @@
 class Video < ApplicationRecord
   include Publishable
   include TopicCountable
+  alias_attribute :title, :name
 
   mount_uploader :cover_link, VideoCoverUploader
   belongs_to :video_type, optional: true
