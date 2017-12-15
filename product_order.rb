@@ -28,6 +28,9 @@ class ProductOrder < ApplicationRecord
     update(cancel_reason: reason, cancelled_at: Time.zone.now, status: 'canceled')
     product_order_items.each do |item|
       item.variant.increase_stock(item.number)
+      next if item.variant.is_master?
+
+      item.variant.product.master.increase_stock(item.number)
     end
   end
 
