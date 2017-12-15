@@ -15,6 +15,14 @@ module TopicCountable
   def decrease_likes
     counter.decrement!(:likes)
   end
+
+  def total_views
+    counter.page_views + counter.view_increment
+  end
+
+  def total_likes
+    counter.likes
+  end
 end
 
 
