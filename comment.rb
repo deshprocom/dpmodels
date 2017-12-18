@@ -1,6 +1,6 @@
 class Comment < ApplicationRecord
   belongs_to :topic, polymorphic: true
-  has_many :replies, as: :typeable, dependent: :destroy
+  has_many :replies, dependent: :destroy
   belongs_to :user
   has_many :dynamics, as: :typological, dependent: :destroy
   include Typologicalable

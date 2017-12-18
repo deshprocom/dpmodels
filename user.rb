@@ -80,4 +80,8 @@ class User < ApplicationRecord
   def tester?
     @is_tester ||= test_user.present?
   end
+
+  def official?
+    role.eql?('official')
+  end
 end
