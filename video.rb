@@ -1,6 +1,7 @@
 class Video < ApplicationRecord
   include Publishable
   include TopicCountable
+  alias_attribute :title, :name
 
   mount_uploader :cover_link, VideoCoverUploader
   belongs_to :video_type, optional: true
@@ -8,6 +9,7 @@ class Video < ApplicationRecord
   belongs_to :video_group, optional: true
   accepts_nested_attributes_for :video_en, update_only: true
   belongs_to :race_tag, optional: true
+  has_many :comments, as: :topic, dependent: :destroy
   has_many :topic_likes, as: :topic, dependent: :destroy
   has_one :counter, class_name: 'VideoCounter'
 
