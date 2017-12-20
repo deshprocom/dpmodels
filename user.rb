@@ -84,4 +84,8 @@ class User < ApplicationRecord
   def official?
     role.eql?('official')
   end
+
+  def self.official
+    find_by!(role: 'official')
+  end
 end
