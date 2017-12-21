@@ -49,6 +49,8 @@ class User < ApplicationRecord
   has_many :replies
   has_many :topic_likes
   has_many :dynamics
+  has_many :user_tag_maps
+  has_many :user_tags, through: :user_tag_maps
   has_many :followed_players, -> { order(id: :desc) }, class_name: PlayerFollow
   accepts_nested_attributes_for :user_extra, update_only: true
 
