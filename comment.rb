@@ -12,4 +12,8 @@ class Comment < ApplicationRecord
     update(deleted_reason: reason, deleted_at: Time.zone.now, deleted: true)
     Dynamic.create(user: User.official, typological: self, option_type: 'delete')
   end
+
+  def self.recommend_comments
+    where(recommended: true)
+  end
 end

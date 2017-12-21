@@ -88,4 +88,19 @@ class User < ApplicationRecord
   def self.official
     find_by!(role: 'official')
   end
+
+  def blocked!
+    update(blocked: true)
+  end
+
+  def unblocked!
+    update(blocked: false)
+  end
+
+  def silenced!(reason, till)
+    update(silenced: true,
+           silence_at: Time.zone.now,
+           silence_reason: reason,
+           silence_till: till)
+  end
 end
