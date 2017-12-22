@@ -105,6 +105,7 @@ module Constants
     module Comment
       BODY_BLANK = 1400001
       ILLEGAL_KEYWORDS = 1400002
+      CANNOT_DELETE = 1400003
     end
   end
 
@@ -185,6 +186,7 @@ module Constants
     Error::Auth::ALREADY_BIND => '该微信已绑定过其它账户',
 
     Error::Comment::BODY_BLANK => '评论或回复的内容不能为空',
-    Error::Comment::ILLEGAL_KEYWORDS => '很抱歉，您评论中存在敏感字符'
+    Error::Comment::ILLEGAL_KEYWORDS => '很抱歉，您评论中存在敏感字符',
+    Error::Comment::CANNOT_DELETE => '不能删除他人的评论'
   }.freeze
 end
