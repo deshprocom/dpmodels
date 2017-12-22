@@ -49,6 +49,8 @@ class User < ApplicationRecord
   has_many :replies
   has_many :topic_likes
   has_many :dynamics
+  has_many :user_tag_maps
+  has_many :user_tags, through: :user_tag_maps
   has_many :followed_players, -> { order(id: :desc) }, class_name: PlayerFollow
   accepts_nested_attributes_for :user_extra, update_only: true
 
@@ -79,5 +81,32 @@ class User < ApplicationRecord
 
   def tester?
     @is_tester ||= test_user.present?
+  end
+
+  def official?
+    role.eql?('official')
+  end
+
+  def self.official
+    find_by!(role: 'official')
+  end
+
+  def blocked!
+    update(blocked: true)
+  end
+
+  def unblocked!
+    update(blocked: false)
+  end
+
+  def silenced!(reason, till)
+    update(silenced: true,
+           silence_at: Time.zone.now,
+           silence_reason: reason,
+           silence_till: till)
+  end
+
+  def silenced_and_till?
+    silenced? && (silence_till > Time.zone.now)
   end
 end
