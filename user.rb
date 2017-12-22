@@ -105,4 +105,8 @@ class User < ApplicationRecord
            silence_reason: reason,
            silence_till: till)
   end
+
+  def silenced_and_till?
+    silenced? && (silence_till > Time.zone.now)
+  end
 end
