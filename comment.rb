@@ -1,5 +1,5 @@
 class Comment < ApplicationRecord
-  belongs_to :topic, polymorphic: true, unscoped: true
+  belongs_to :topic, -> { unscope(:where) }, polymorphic: true
   has_many :replies, dependent: :destroy
   belongs_to :user
   has_many :dynamics, as: :typological, dependent: :destroy

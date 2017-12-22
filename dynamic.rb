@@ -1,5 +1,6 @@
 class Dynamic < ApplicationRecord
-  belongs_to :typological, polymorphic: true, unscoped: true
+  # belongs_to :typological, polymorphic: true
+  belongs_to :typological, -> { unscope(:where) }, polymorphic: true
   belongs_to :user
 
   def self.received_message
