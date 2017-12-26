@@ -8,6 +8,7 @@ class Comment < ApplicationRecord
   include UnscopeTopic
 
   default_scope { where(deleted: false) }
+  scope :order_show, -> { order(recommended: :desc).order(created_at: :desc) }
 
   def admin_delete(reason = '')
     update(deleted_reason: reason, deleted_at: Time.zone.now, deleted: true)
