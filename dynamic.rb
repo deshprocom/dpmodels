@@ -6,6 +6,10 @@ class Dynamic < ApplicationRecord
     where.not(typological_type: 'TopicLike')
   end
 
+  def self.normal_dynamics
+    where(option_type: 'normal')
+  end
+
   def deleted_type?
     option_type.eql?('delete')
   end
