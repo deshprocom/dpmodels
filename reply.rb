@@ -28,9 +28,8 @@ class Reply < ApplicationRecord
     where(reply_user: user).order(created_at: :desc)
   end
 
-  def read!
-    return if is_read?
-    update(is_read: true)
+  def self.read!(user)
+    where(reply_user: user).where(is_read: false).update(is_read: true)
   end
 
   def self.unread_count(user)
