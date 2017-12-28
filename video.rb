@@ -51,4 +51,8 @@ class Video < ApplicationRecord
 
     cover_link.url
   end
+
+  def share_link
+    ENV['H5_WEB_URL'] + '/' + "videos/#{id}/zh"
+  end
 end
