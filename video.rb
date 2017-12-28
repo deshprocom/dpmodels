@@ -12,6 +12,7 @@ class Video < ApplicationRecord
   has_many :comments, as: :topic, dependent: :destroy
   has_many :topic_likes, as: :topic, dependent: :destroy
   has_one :counter, class_name: 'VideoCounter'
+  has_one :topic_view_toggle, dependent: :destroy
 
   before_save do
     self.description = ActionController::Base.helpers.strip_tags(description)

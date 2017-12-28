@@ -10,6 +10,7 @@ class Info < ApplicationRecord
   has_many :comments, as: :topic, dependent: :destroy
   has_many :topic_likes, as: :topic, dependent: :destroy
   has_one :counter, class_name: 'InfoCounter'
+  has_one :topic_view_toggle, dependent: :destroy
 
   after_initialize do
     self.date ||= Date.current
