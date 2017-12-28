@@ -8,6 +8,10 @@ module TopicCountable
     counter.increment!(:page_views)
   end
 
+  def increase_view_increment(by)
+    counter.increment!(:view_increment, by)
+  end
+
   def increase_likes
     counter.increment!(:likes)
   end
