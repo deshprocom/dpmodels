@@ -49,4 +49,8 @@ class Info < ApplicationRecord
 
     image.url
   end
+
+  def share_link
+    ENV['H5_WEB_URL'] + '/' + "news/#{id}/zh"
+  end
 end
