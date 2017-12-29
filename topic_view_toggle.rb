@@ -18,4 +18,8 @@ class TopicViewToggle < ApplicationRecord
     rule = TopicViewRule.where('day': current_period).find_by('hot': hot)
     rule.blank? ? last_rule : rule
   end
+
+  def rule_exist?
+    TopicViewRule.exists?('hot': hot)
+  end
 end
