@@ -9,7 +9,7 @@ class Crowdfunding < ApplicationRecord
   belongs_to :race
   has_many :players
   has_many :crowdfunding_categories, -> { order(position: :asc) }, dependent: :destroy
-  accepts_nested_attributes_for :crowdfunding_categories, :allow_destroy => true
+  accepts_nested_attributes_for :crowdfunding_categories, allow_destroy: true
   default_scope { where(published: true) } unless ENV['CURRENT_PROJECT'] == 'dpcms'
 
   after_initialize do
