@@ -20,6 +20,7 @@
 =end
 class Player < ApplicationRecord
   mount_uploader :avatar, PlayerUploader
+  mount_uploader :logo, PlayerLogoUploader
   has_many :race_ranks, -> { order(end_date: :desc) }
   has_many :followed_user, -> { order(id: :desc) }, class_name: PlayerFollow
   attr_accessor :avatar_thumb
@@ -62,5 +63,11 @@ class Player < ApplicationRecord
 
   def ranking
     Player.leaderboard.rank_for(id)
+  end
+
+  def preview_logo
+    return '' if logo&.url.nil?
+
+    logo.url(:sm)
   end
 end
