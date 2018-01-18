@@ -12,7 +12,6 @@ class Crowdfunding < ApplicationRecord
   has_many :players
   has_many :crowdfunding_categories, -> { order(position: :asc) }, dependent: :destroy
   accepts_nested_attributes_for :crowdfunding_categories, allow_destroy: true
-  default_scope { where(published: true) } unless ENV['CURRENT_PROJECT'] == 'dpcms'
   validates :race_id, presence: true
 
   after_initialize do
@@ -20,6 +19,9 @@ class Crowdfunding < ApplicationRecord
     self.publish_date ||= Date.current
     self.award_date ||= Date.current
   end
+
+  scope :published, -> { where(published: true) }
+  scope :sorted, -> { order(created_at: :desc) }
 
   def preview_image
     return '' if master_image.url.nil?
