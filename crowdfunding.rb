@@ -31,4 +31,16 @@ class Crowdfunding < ApplicationRecord
     crowdfunding_categories.create(name: '项目介绍', description: race&.race_desc&.description)
     %w(众筹概况 项目公告 投资风险).each { |name| crowdfunding_categories.create(name: name) }
   end
+
+  def player_count
+    crowdfunding_players.where(published: true).count
+  end
+
+  def cf_total_money
+    crowdfunding_players.where(published: true).sum(:cf_money)
+  end
+
+  def cf_offer_money
+    crowdfunding_players.where(published: true).sum { |item| item.counter.order_stock_money }
+  end
 end
