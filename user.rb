@@ -53,6 +53,7 @@ class User < ApplicationRecord
   has_many :user_tags, through: :user_tag_maps
   has_many :followed_players, -> { order(id: :desc) }, class_name: PlayerFollow
   accepts_nested_attributes_for :user_extra, update_only: true
+  has_many :poker_coins, dependent: :destroy
 
   enum status: { basic: 'basic', banned: 'banned' }
 
@@ -108,5 +109,9 @@ class User < ApplicationRecord
 
   def silenced_and_till?
     silenced? && (silence_till > Time.zone.now)
+  end
+
+  def total_coins
+    poker_coins.sum(:number)
   end
 end

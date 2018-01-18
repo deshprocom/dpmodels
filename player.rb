@@ -25,6 +25,7 @@ class Player < ApplicationRecord
   has_many :followed_user, -> { order(id: :desc) }, class_name: PlayerFollow
   attr_accessor :avatar_thumb
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+  has_many :player_images, dependent: :destroy
   # after_update :crop_avatar
 
   validates :name, :country, presence: true

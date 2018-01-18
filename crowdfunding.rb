@@ -1,6 +1,7 @@
 class Crowdfunding < ApplicationRecord
   has_one :race
   has_many :crowdfunding_players, dependent: :destroy
+  has_many :poker_coins, as: :typeable, dependent: :destroy
   mount_uploader :master_image, CrowdfundingUploader
   include Publishable
   after_create do
