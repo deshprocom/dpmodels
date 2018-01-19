@@ -2,8 +2,10 @@ class Crowdfunding < ApplicationRecord
   has_one :race
   has_many :crowdfunding_players, dependent: :destroy
   has_many :poker_coins, as: :typeable, dependent: :destroy
+  has_many :crowdfunding_orders
   mount_uploader :master_image, CrowdfundingUploader
   include Publishable
+  include CrowdfundingCountable
   after_create do
     create_default_category
   end
@@ -35,14 +37,14 @@ class Crowdfunding < ApplicationRecord
   end
 
   def player_count
-    crowdfunding_players.where(published: true).count
+    crowdfunding_players.published.count
   end
 
   def cf_total_money
-    crowdfunding_players.where(published: true).sum(:cf_money)
+    crowdfunding_players.published.sum(:cf_money)
   end
 
   def cf_offer_money
-    crowdfunding_players.where(published: true).sum { |item| item.counter.order_stock_money }
+    crowdfunding_players.published.sum { |item| item.counter.order_stock_money }
   end
 end

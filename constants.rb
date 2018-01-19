@@ -71,6 +71,8 @@ module Constants
       REFUND_ALREADY_EXIST = 1110008
       OVER_REFUND_TIME = 1110009
       CANNOT_DELETE = 1110010
+      LIMIT_PAY = 1110011
+      REBUY = 1110012
     end
 
     module Account
@@ -167,6 +169,8 @@ module Constants
     Error::Order::REFUND_ALREADY_EXIST => '退换列表有商品已存在退款记录',
     Error::Order::OVER_REFUND_TIME => '订单已经超过售后保障期',
     Error::Order::CANNOT_DELETE => '订单状态不支持删除',
+    Error::Order::LIMIT_PAY => '超出购买数量',
+    Error::Order::REBUY => '同个用户只能购买一次',
 
     Error::Account::NO_CERTIFICATION => '用户未实名',
     Error::Account::REAL_NAME_FORMAT_WRONG => '真实姓名格式错误',
