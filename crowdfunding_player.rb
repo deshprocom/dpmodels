@@ -15,4 +15,9 @@ class CrowdfundingPlayer < ApplicationRecord
 
   scope :published, -> { where(published: true) }
   scope :sorted, -> { order(created_at: :desc) }
+
+  def order_fans
+    ids = crowdfunding_orders.where(paid: true).pluck(:user_id).uniq
+    { number: ids.length, users: User.find(ids) }
+  end
 end
