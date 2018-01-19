@@ -13,6 +13,7 @@ class Crowdfunding < ApplicationRecord
   belongs_to :race
   has_many :players
   has_many :crowdfunding_categories, -> { order(position: :asc) }, dependent: :destroy
+  has_one :counter, class_name: 'CrowdfundingCounter'
   accepts_nested_attributes_for :crowdfunding_categories, allow_destroy: true
   validates :race_id, presence: true
 
