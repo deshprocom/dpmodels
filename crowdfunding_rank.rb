@@ -1,0 +1,2 @@
+class CrowdfundingRank < ApplicationRecord
+end
