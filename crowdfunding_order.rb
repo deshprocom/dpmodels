@@ -6,4 +6,12 @@ class CrowdfundingOrder < ApplicationRecord
   before_create do
     self.order_number = Services::UniqueNumberGenerator.call(CrowdfundingOrder)
   end
+
+  default_scope { where(deleted: false) } unless ENV['CURRENT_PROJECT'] == 'dpcms'
+
+  enum record_status: { unpublished: 'unpublished', success: 'success', failed: 'failed' }
+
+  def deleted!
+    update(deleted: true)
+  end
 end
