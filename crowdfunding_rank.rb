@@ -5,8 +5,8 @@ class CrowdfundingRank < ApplicationRecord
   belongs_to :crowdfunding_player
 
   before_save do
-    self.sale_amount = (earning-deduct_tax)*crowdfunding_player.sell_stock/100
-    self.total_amount = platform_tax.zero? ? sale_amount : sale_amount * platform_tax/100
+    self.sale_amount = (earning - deduct_tax) * crowdfunding_player.sell_stock / 100
+    self.total_amount = platform_tax.zero? ? sale_amount : sale_amount * platform_tax / 100
     self.end_date = race&.end_date
   end
 
