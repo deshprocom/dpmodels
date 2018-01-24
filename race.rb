@@ -28,6 +28,7 @@ class Race < ApplicationRecord
 
   has_many :race_follows
   has_many :race_ranks, -> { order(ranking: :asc) }
+  has_many :crowdfunding_ranks, -> { order(ranking: :asc) }
   has_many :race_blinds
   has_many :tickets, -> { order(level: :asc) }
   has_many :race_orders, class_name: PurchaseOrder

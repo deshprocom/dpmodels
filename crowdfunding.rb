@@ -3,6 +3,7 @@ class Crowdfunding < ApplicationRecord
   has_many :crowdfunding_players, dependent: :destroy
   has_many :poker_coins, as: :typeable, dependent: :destroy
   has_many :crowdfunding_orders
+  has_many :crowdfunding_ranks, -> { order(ranking: :asc) }
   mount_uploader :master_image, CrowdfundingUploader
   include Publishable
   include CrowdfundingCountable
