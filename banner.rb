@@ -12,6 +12,8 @@ class Banner < ApplicationRecord
 
   scope :default_order, -> { order(position: :asc) }
   scope :published, -> { where(published: true) }
+  scope :homepage_published, -> { homepage.published }
+  scope :crowdfunding_published, -> { crowdfunding.published }
 
   def internal_source?
     source_type.in? %w(race info video)
