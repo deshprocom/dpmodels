@@ -8,6 +8,8 @@ class Banner < ApplicationRecord
   validates :source_id, presence: true, if: :internal_source?
   validates :image, presence: true, if: :new_record?
 
+  enum banner_type: { homepage: 'homepage', crowdfunding: 'crowdfunding' }
+
   scope :default_order, -> { order(position: :asc) }
   scope :published, -> { where(published: true) }
 
