@@ -12,6 +12,14 @@ class CrowdfundingRank < ApplicationRecord
     self.end_date = race&.end_date
   end
 
+  after_save do
+    if !awarded && !finaled
+      crowdfunding_player.crowdfunding_orders.each(&:failed!)
+    else
+      crowdfunding_player.crowdfunding_orders.each(&:success!)
+    end
+  end
+
   def self.update_or_create(attributes)
     assign_or_new(attributes).save
   end
