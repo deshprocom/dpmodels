@@ -24,6 +24,7 @@ class User < ApplicationRecord
   include UserUniqueValidator
   include UserNameGenerator
   include UserCreator
+  include UserCountable
   mount_uploader :avatar, AvatarUploader
 
   # 增加二级查询缓存，缓存过期时间六小时
@@ -55,6 +56,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :user_extra, update_only: true
   has_many :poker_coins
   has_many :crowdfunding_orders, -> { where(paid: true).order(created_at: :desc) }
+  has_one :counter, class_name: 'UserCounter'
 
   enum status: { basic: 'basic', banned: 'banned' }
 
