@@ -16,8 +16,10 @@ class CrowdfundingRank < ApplicationRecord
   after_save do
     if !awarded && !finaled
       crowdfunding_player.crowdfunding_orders.each(&:failed!)
+      crowdfunding_player.failed!
     else
       crowdfunding_player.crowdfunding_orders.each(&:success!)
+      crowdfunding_player.success!
     end
   end
 
