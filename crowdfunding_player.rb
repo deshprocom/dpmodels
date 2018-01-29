@@ -3,7 +3,7 @@ class CrowdfundingPlayer < ApplicationRecord
   belongs_to :crowdfunding
   belongs_to :player
   has_one :counter, class_name: 'CrowdfundingPlayerCounter'
-  has_many :crowdfunding_orders, -> { where(paid: true).order(created_at: :asc) }
+  has_many :crowdfunding_orders, -> { order(created_at: :asc) }
   has_one :crowdfunding_rank, dependent: :destroy
   accepts_nested_attributes_for :player
   validates :player_id, :sell_stock, :stock_number,

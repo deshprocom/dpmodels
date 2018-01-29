@@ -55,7 +55,7 @@ class User < ApplicationRecord
   has_many :followed_players, -> { order(id: :desc) }, class_name: PlayerFollow
   accepts_nested_attributes_for :user_extra, update_only: true
   has_many :poker_coins, -> { order(id: :desc) }
-  has_many :crowdfunding_orders, -> { where(paid: true).order(created_at: :desc) }
+  has_many :crowdfunding_orders, -> { order(created_at: :desc) }
   has_one :counter, class_name: 'UserCounter'
 
   enum status: { basic: 'basic', banned: 'banned' }
