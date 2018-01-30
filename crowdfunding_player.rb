@@ -9,6 +9,7 @@ class CrowdfundingPlayer < ApplicationRecord
   validates :player_id, :sell_stock, :stock_number,
             :stock_unit_price, :limit_buy, presence: true
   include CrowdfundingPlayerCountable
+  has_many :crowdfunding_reports, -> { order(created_at: :desc) }, dependent: :destroy
 
   before_save do
     self.cf_money = stock_number * stock_unit_price
