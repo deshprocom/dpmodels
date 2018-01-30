@@ -17,6 +17,7 @@ class Crowdfunding < ApplicationRecord
   has_one :counter, class_name: 'CrowdfundingCounter'
   accepts_nested_attributes_for :crowdfunding_categories, allow_destroy: true
   validates :race_id, presence: true
+  has_many :crowdfunding_reports, -> { order(created_at: :desc) }, dependent: :destroy
 
   after_initialize do
     self.expire_date ||= Date.current

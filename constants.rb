@@ -73,6 +73,7 @@ module Constants
       CANNOT_DELETE = 1110010
       LIMIT_PAY = 1110011
       REBUY = 1110012
+      OUTDATE = 1110013
     end
 
     module Account
@@ -171,6 +172,7 @@ module Constants
     Error::Order::CANNOT_DELETE => '订单状态不支持删除',
     Error::Order::LIMIT_PAY => '超出购买数量',
     Error::Order::REBUY => '同个用户只能购买一次',
+    Error::Order::OUTDATE => '众筹已截止',
 
     Error::Account::NO_CERTIFICATION => '用户未实名',
     Error::Account::REAL_NAME_FORMAT_WRONG => '真实姓名格式错误',

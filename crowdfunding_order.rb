@@ -8,6 +8,7 @@ class CrowdfundingOrder < ApplicationRecord
   end
 
   default_scope { where(deleted: false) } unless ENV['CURRENT_PROJECT'] == 'dpcms'
+  scope :paid_status, -> { where(paid: true) }
 
   enum record_status: { unpublished: 'unpublished', success: 'success', failed: 'failed' }
 
