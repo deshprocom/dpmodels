@@ -14,4 +14,8 @@ class CrowdfundingOrder < ApplicationRecord
   def deleted!
     update(deleted: true)
   end
+
+  def paid!
+    update(paid: true)
+  end
 end
