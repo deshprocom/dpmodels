@@ -48,6 +48,6 @@ class Crowdfunding < ApplicationRecord
   end
 
   def cf_offer_money
-    crowdfunding_players.published.sum { |item| item.counter.order_stock_money }
+    crowdfunding_players.published.sum { |item| item.counter.total_money }
   end
 end
