@@ -25,8 +25,4 @@ class CrowdfundingPlayer < ApplicationRecord
     ids = crowdfunding_orders.where(paid: true).pluck(:user_id).uniq
     { number: ids.length, users: User.find(ids) }
   end
-
-  def name
-    player.name
-  end
 end
