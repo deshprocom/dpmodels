@@ -18,6 +18,8 @@ class CrowdfundingPlayer < ApplicationRecord
   enum award_status: { init: 'init', waiting: 'waiting', completed: 'completed' }
   enum record_status: { unpublished: 'unpublished', success: 'success', failed: 'failed' }
 
+  delegate :name, to: :player, allow_nil: true
+
   scope :published, -> { where(published: true) }
   scope :sorted, -> { order(created_at: :desc) }
 
