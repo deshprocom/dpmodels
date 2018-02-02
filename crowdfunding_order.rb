@@ -2,6 +2,7 @@ class CrowdfundingOrder < ApplicationRecord
   belongs_to :user
   belongs_to :crowdfunding_player
   belongs_to :crowdfunding
+  belongs_to :user_extra, optional: true
 
   before_create do
     self.order_number = Services::UniqueNumberGenerator.call(CrowdfundingOrder)
