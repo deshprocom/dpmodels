@@ -2,6 +2,7 @@ class CrowdfundingOrder < ApplicationRecord
   belongs_to :user
   belongs_to :crowdfunding_player
   belongs_to :crowdfunding
+  belongs_to :user_extra, optional: true
 
   before_create do
     self.order_number = Services::UniqueNumberGenerator.call(CrowdfundingOrder)
@@ -18,5 +19,9 @@ class CrowdfundingOrder < ApplicationRecord
 
   def paid!
     update(paid: true)
+  end
+
+  def self.past_buy_number(cf_player, user)
+    where(paid: true).where(crowdfunding_player: cf_player).where(user: user).sum(&:order_stock_number)
   end
 end
