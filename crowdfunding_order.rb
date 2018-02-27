@@ -20,4 +20,8 @@ class CrowdfundingOrder < ApplicationRecord
   def paid!
     update(paid: true)
   end
+
+  def self.past_buy_number(cf_player, user)
+    where(paid: true).where(crowdfunding_player: cf_player).where(user: user).sum(&:order_stock_number)
+  end
 end
