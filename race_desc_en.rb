@@ -12,5 +12,6 @@ class RaceDescEn < ApplicationRecord
 
   before_save do
     self.description = ActionController::Base.helpers.strip_tags(description)
+    self.schedules = ActionController::Base.helpers.strip_tags(schedules)
   end
 end
