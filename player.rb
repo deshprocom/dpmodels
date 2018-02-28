@@ -43,8 +43,9 @@ class Player < ApplicationRecord
     avatar.recreate_versions! if crop_x.present?
   end
 
+  DEFAULT_AVATAR = "#{ENV['UPYUN_BUCKET_HOST']}/uploads/player/defalt_player_avatar.png".freeze
   def avatar_thumb
-    return '' if avatar.thumb.url.nil?
+    return DEFAULT_AVATAR if avatar.thumb.url.nil?
 
     avatar.thumb.url + "?suffix=#{updated_at.to_i}"
   end
