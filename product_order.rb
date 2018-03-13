@@ -37,6 +37,8 @@ class ProductOrder < ApplicationRecord
     if deduction && deduction_result.eql?('success')
       PokerCoin.deduction(self, '商品订单返还扑客币', deduction_numbers, '+')
       deduction_success
+    else
+      true
     end
   end
 
