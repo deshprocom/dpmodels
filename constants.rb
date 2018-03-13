@@ -74,6 +74,7 @@ module Constants
       LIMIT_PAY = 1110011
       REBUY = 1110012
       OUTDATE = 1110013
+      DEDUCTION_ERROR = 1110014
     end
 
     module Account
@@ -173,6 +174,7 @@ module Constants
     Error::Order::LIMIT_PAY => '超出购买数量',
     Error::Order::REBUY => '同个用户只能购买一次',
     Error::Order::OUTDATE => '众筹已截止',
+    Error::Order::DEDUCTION_ERROR => '可抵扣的扑客币数量异常',
 
     Error::Account::NO_CERTIFICATION => '用户未实名',
     Error::Account::REAL_NAME_FORMAT_WRONG => '真实姓名格式错误',

@@ -5,6 +5,7 @@ class ProductOrder < ApplicationRecord
   has_many :product_order_items, dependent: :destroy
   has_many :product_wx_bills, dependent: :destroy
   has_one :product_shipment, dependent: :destroy
+  include DeductionResult
 
   PAY_STATUSES = %w(unpaid paid failed refund).freeze
   validates :pay_status, inclusion: { in: PAY_STATUSES }
@@ -31,6 +32,11 @@ class ProductOrder < ApplicationRecord
       next if item.variant.is_master?
 
       item.variant.product.master.increase_stock(item.number)
+    end
+    # 将扑客币的数量添加上去
+    if deduction && deduction_result.eql?('success')
+      PokerCoin.deduction(self, '商品订单返还扑客币', deduction_numbers, '+')
+      deduction_success
     end
   end
 
