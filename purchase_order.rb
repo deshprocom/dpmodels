@@ -29,6 +29,7 @@ class PurchaseOrder < ApplicationRecord
   has_many :wx_bills, primary_key: :order_number, foreign_key: :out_trade_no
   has_many :bills, primary_key: :order_number, foreign_key: :order_number
   belongs_to :invite_person, class_name: 'InviteCode', foreign_key: :invite_code, primary_key: :code, optional: true
+  include DeductionResult
 
   validates :order_number, presence: true
   enum status: { unpaid: 'unpaid',
@@ -65,5 +66,12 @@ class PurchaseOrder < ApplicationRecord
 
   def self.delivered_15_days
     delivered.where('delivery_time < ?', 15.days.ago)
+  end
+
+  def max_deduction_poker_coins
+    # 用户总的扑客币数量
+    user_account = user.counter.total_poker_coins
+    max_deduction = price * PokerCoinDiscount.first.discount * 100
+    user_account > max_deduction ? max_deduction : user_account
   end
 end
