@@ -1,3 +1,0 @@
-class AdminUserRole < ApplicationRecord
-  
-end

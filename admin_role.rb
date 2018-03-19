@@ -1,5 +1,6 @@
 class AdminRole < ApplicationRecord
-  has_and_belongs_to_many :admin_users, join_table: :admin_users_roles
+  has_many :admin_users_roles
+  has_many :admin_users, through: :admin_users_roles
   serialize :permissions, JSON
 
   def permissions_text
