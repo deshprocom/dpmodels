@@ -1,5 +1,5 @@
 class AdminRole < ApplicationRecord
-  has_many :admin_users_roles
+  has_many :admin_users_roles, dependent: :destroy
   has_many :admin_users, through: :admin_users_roles
   serialize :permissions, JSON
 
