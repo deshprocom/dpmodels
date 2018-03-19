@@ -66,9 +66,9 @@ module Constants
       INVITE_CODE_NOT_EXIST = 1110003
       INVALID_ORDER = 1110004
       CANNOT_CONFIRM = 1110005
-      CANNOT_REFUND = 1110006
+      SEVEN_DAYS_REFUND_ERROR = 1110006
       INVALID_REFUND_PRICE = 1110007
-      REFUND_ALREADY_EXIST = 1110008
+      CANNOT_REFUND = 1110008
       OVER_REFUND_TIME = 1110009
       CANNOT_DELETE = 1110010
       LIMIT_PAY = 1110011
@@ -166,9 +166,9 @@ module Constants
     Error::Order::INVITE_CODE_NOT_EXIST => '邀请码不存在',
     Error::Order::INVALID_ORDER => '无效的订单',
     Error::Order::CANNOT_CONFIRM => '当前状态不允许确认收货',
-    Error::Order::CANNOT_REFUND => '退换列表有商品不支持7天退换货',
+    Error::Order::SEVEN_DAYS_REFUND_ERROR => '退换列表有商品不支持7天退换货',
     Error::Order::INVALID_REFUND_PRICE => '退款金额不合法或超出实际金额',
-    Error::Order::REFUND_ALREADY_EXIST => '退换列表有商品已存在退款记录',
+    Error::Order::CANNOT_REFUND => '当前商品已退款完成',
     Error::Order::OVER_REFUND_TIME => '订单已经超过售后保障期',
     Error::Order::CANNOT_DELETE => '订单状态不支持删除',
     Error::Order::LIMIT_PAY => '超出购买数量',

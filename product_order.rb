@@ -69,4 +69,26 @@ class ProductOrder < ApplicationRecord
   def self.delivered_15_days
     delivered.where('delivered_time < ?', 15.days.ago)
   end
+
+  # 是否可退现金
+  def could_refund_cash?
+    could_refund_cash_numbers.positive?
+  end
+
+  # 可退的现金
+  def could_refund_cash_numbers
+    final_price - refund_price
+  end
+
+  def could_refund_poker_coins?
+    # 没有使用扑客币抵扣，那么程序直接去退现金
+    return true if deduction_numbers.to_i <= 0
+    # 使用了扑客币抵扣，并且扑客币都退完了，说明现金也退完了
+    could_refund_poker_numbers.positive?
+  end
+
+  # 可退的扑客币
+  def could_refund_poker_numbers
+    deduction_numbers - refund_poker_coins
+  end
 end
