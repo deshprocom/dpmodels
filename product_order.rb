@@ -81,6 +81,9 @@ class ProductOrder < ApplicationRecord
   end
 
   def could_refund_poker_coins?
+    # 没有使用扑客币抵扣，那么程序直接去退现金
+    return true if deduction_numbers.to_i <= 0
+    # 使用了扑客币抵扣，并且扑客币都退完了，说明现金也退完了
     could_refund_poker_numbers.positive?
   end
 
