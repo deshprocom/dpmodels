@@ -16,10 +16,6 @@ class Info < ApplicationRecord
     self.date ||= Date.current
   end
 
-  before_save do
-    self.description = ActionController::Base.helpers.strip_tags(description)
-  end
-
   after_update do
     info_en || build_info_en
     info_en.save
