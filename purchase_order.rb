@@ -71,7 +71,7 @@ class PurchaseOrder < ApplicationRecord
   def max_deduction_poker_coins
     # 用户总的扑客币数量
     user_account = user.counter.total_poker_coins
-    max_deduction = price * 100 * PokerCoinDiscount.first.discount
+    max_deduction = price * PokerCoinDiscount.first.discount * 100
     user_account > max_deduction ? max_deduction : user_account
   end
 end
