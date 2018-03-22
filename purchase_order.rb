@@ -72,7 +72,7 @@ class PurchaseOrder < ApplicationRecord
     # 用户总的扑客币数量
     user_account = user.counter.total_poker_coins
     max_deduction = price * PokerCoinDiscount.first.discount * 100
-    Rails.logger.info "cf model: user_account-> #{user_account}, max_deduction-> #{max_deduction}"
+    Rails.logger.info "race model: user_account-> #{user_account}, max_deduction-> #{max_deduction}"
     user_account > max_deduction ? max_deduction : user_account
   end
 end
