@@ -111,6 +111,11 @@ module Constants
       ILLEGAL_KEYWORDS = 1400002
       CANNOT_DELETE = 1400003
     end
+
+    module Topic
+      TITLE_BLANK = 1500001
+      IMAGE_COUNT_OVER = 1500002
+    end
   end
 
   ERROR_MESSAGES = {
@@ -195,6 +200,9 @@ module Constants
 
     Error::Comment::BODY_BLANK => '评论或回复的内容不能为空',
     Error::Comment::ILLEGAL_KEYWORDS => '很抱歉，您评论中存在敏感字符',
-    Error::Comment::CANNOT_DELETE => '不能删除他人的评论'
+    Error::Comment::CANNOT_DELETE => '不能删除他人的评论',
+
+    Error::Topic::TITLE_BLANK => '长帖标题不能为空',
+    Error::Topic::IMAGE_COUNT_OVER => '最多上传9张图片'
   }.freeze
 end
