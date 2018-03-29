@@ -33,11 +33,11 @@ class User < ApplicationRecord
   attr_accessor :avatar_path
 
   # 关联关系
-  has_one  :user_extra
+  has_one :user_extra
   # 新增用户和实名为 多对1 的关系
   has_many :user_extras
-  has_one  :weixin_user
-  has_one  :test_user
+  has_one :weixin_user
+  has_one :test_user
   has_many :race_follows
   has_many :tickets
   has_many :purchase_orders
@@ -52,6 +52,8 @@ class User < ApplicationRecord
   has_many :dynamics
   has_many :user_tag_maps
   has_many :user_tags, through: :user_tag_maps
+  has_many :followers, class_name: 'Followship', foreign_key: 'following_id'
+  has_many :followings, class_name: 'Followship', foreign_key: 'follower_id'
   has_many :followed_players, -> { order(id: :desc) }, class_name: PlayerFollow
   accepts_nested_attributes_for :user_extra, update_only: true
   has_many :poker_coins, -> { order(id: :desc) }
