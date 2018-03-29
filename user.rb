@@ -57,6 +57,7 @@ class User < ApplicationRecord
   has_many :poker_coins, -> { order(id: :desc) }
   has_many :crowdfunding_orders, -> { order(created_at: :desc) }
   has_one :counter, class_name: 'UserCounter'
+  has_many :user_topics
 
   enum status: { basic: 'basic', banned: 'banned' }
 
