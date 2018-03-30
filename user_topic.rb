@@ -10,6 +10,8 @@ class UserTopic < ApplicationRecord
   scope :recommended, -> { where(recommended: true) }
   scope :order_show, -> { order(recommended: :desc).order(created_at: :desc) }
 
+  alias_attribute :description, :body
+
   def publish!
     update(published: true, published_time: Time.zone.now)
   end
