@@ -11,4 +11,11 @@ class VideoType < ApplicationRecord
   end
 
   default_scope { where(published: true) } unless ENV['CURRENT_PROJECT'] == 'dpcms'
+
+  def self.video_type_array
+    all.collect do |item|
+      type_name = item.published ? item.name + ' [已发布]' : item.name + ' [未发布]'
+      [type_name, item.id]
+    end
+  end
 end
