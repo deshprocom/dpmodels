@@ -22,6 +22,10 @@ class UserTopic < ApplicationRecord
     body_type == 'long'
   end
 
+  def short?
+    body_type == 'short'
+  end
+
   def total_likes
     counter.likes
   end
