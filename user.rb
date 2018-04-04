@@ -60,6 +60,7 @@ class User < ApplicationRecord
   has_many :crowdfunding_orders, -> { order(created_at: :desc) }
   has_one :counter, class_name: 'UserCounter'
   has_many :user_topics
+  has_one :j_user, dependent: :destroy
 
   enum status: { basic: 'basic', banned: 'banned' }
 
