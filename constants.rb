@@ -115,6 +115,7 @@ module Constants
     module Topic
       TITLE_BLANK = 1500001
       IMAGE_COUNT_OVER = 1500002
+      CANNOT_UPDATE = 1500003
     end
   end
 
@@ -203,6 +204,7 @@ module Constants
     Error::Comment::CANNOT_DELETE => '不能删除他人的评论',
 
     Error::Topic::TITLE_BLANK => '长帖标题不能为空',
-    Error::Topic::IMAGE_COUNT_OVER => '最多上传9张图片'
+    Error::Topic::IMAGE_COUNT_OVER => '最多上传9张图片',
+    Error::Topic::CANNOT_UPDATE => '当前状态不支持更新'
   }.freeze
 end
