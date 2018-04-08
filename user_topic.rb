@@ -4,6 +4,7 @@ class UserTopic < ApplicationRecord
   has_many :topic_images, class_name: 'UserTopicImage'
   has_one :counter, class_name: 'UserTopicCounter', dependent: :destroy
   has_many :comments, as: :topic, dependent: :destroy
+  has_many :topic_likes, as: :topic
 
   default_scope { where(deleted: false) }
 
