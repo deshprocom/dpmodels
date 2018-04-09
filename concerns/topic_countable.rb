@@ -20,12 +20,24 @@ module TopicCountable
     counter.decrement!(:likes)
   end
 
+  def increase_comments
+    counter.increment!(:comments)
+  end
+
+  def decrease_comments
+    counter.decrement!(:comments)
+  end
+
   def total_views
     counter.page_views + counter.view_increment
   end
 
   def total_likes
     counter.likes
+  end
+
+  def total_comments
+    counter.comments
   end
 end
 

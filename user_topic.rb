@@ -1,6 +1,6 @@
 class UserTopic < ApplicationRecord
   belongs_to :user
-  include UserTopicCountable
+  include TopicCountable
   has_many :topic_images, class_name: 'UserTopicImage'
   has_one :counter, class_name: 'UserTopicCounter', dependent: :destroy
   has_many :comments, as: :topic, dependent: :destroy

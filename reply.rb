@@ -13,10 +13,12 @@ class Reply < ApplicationRecord
 
   after_create do
     comment.increment!(:reply_count)
+    topic.increase_comments
   end
 
   after_destroy do
     comment.decrement!(:reply_count)
+    topic.decrease_comments
   end
 
   def admin_delete(reason = '')

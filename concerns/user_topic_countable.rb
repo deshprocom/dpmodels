@@ -15,4 +15,12 @@ module UserTopicCountable
   def decrease_likes
     counter.decrement!(:likes)
   end
+
+  def increase_comments
+    counter.increment!(:comments)
+  end
+
+  def decrease_comments
+    counter.decrement!(:comments)
+  end
 end

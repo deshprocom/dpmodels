@@ -7,6 +7,14 @@ class Comment < ApplicationRecord
   include Recommendable
   include UnscopeTopic
 
+  after_create do
+    topic.increase_comments
+  end
+
+  after_destroy do
+    topic.decrease_comments
+  end
+
   default_scope { where(deleted: false) }
   scope :order_show, -> { order(recommended: :desc).order(created_at: :desc) }
 
