@@ -28,6 +28,10 @@ module TopicCountable
     counter.decrement!(:comments)
   end
 
+  def decrease_comment_by(by)
+    counter.decrement!(:comments, by)
+  end
+
   def total_views
     counter.page_views + counter.view_increment
   end

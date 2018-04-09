@@ -23,6 +23,8 @@ class Reply < ApplicationRecord
 
   def admin_delete(reason = '')
     update(deleted_reason: reason, deleted_at: Time.zone.now, deleted: true)
+    comment.decrement!(:reply_count)
+    topic.decrease_comments
     Dynamic.create(user: User.official, typological: self, option_type: 'delete')
   end
 
