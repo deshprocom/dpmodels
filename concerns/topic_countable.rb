@@ -25,11 +25,11 @@ module TopicCountable
   end
 
   def decrease_comments
-    counter.decrement!(:comments)
+    counter.decrement!(:comments) if counter.present?
   end
 
   def decrease_comment_by(by)
-    counter.decrement!(:comments, by)
+    counter.decrement!(:comments, by) if counter.present?
   end
 
   def total_views
