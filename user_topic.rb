@@ -5,6 +5,7 @@ class UserTopic < ApplicationRecord
   has_one :counter, class_name: 'UserTopicCounter', dependent: :destroy
   has_many :comments, as: :topic, dependent: :destroy
   has_many :topic_likes, as: :topic, dependent: :destroy
+  after_validation :reverse_geocode
 
   default_scope { where(deleted: false) }
 
@@ -34,5 +35,13 @@ class UserTopic < ApplicationRecord
 
   def total_likes
     counter.likes
+  end
+
+  reverse_geocoded_by :lat, :lng do |obj, results|
+    result = results.first
+    if result
+      obj.location = result.address
+      obj.gc_business = result.business
+    end
   end
 end
