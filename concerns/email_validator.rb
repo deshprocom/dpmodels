@@ -9,6 +9,7 @@ module EmailValidator
 
   module ClassMethods
     def email_valid?(email)
+      email = email.strip
       if email =~ EmailValidator::INVALID_FORMAT || email !~ EmailValidator::VALID_FORMAT
         false
       else
