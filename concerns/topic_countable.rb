@@ -32,6 +32,14 @@ module TopicCountable
     counter.decrement!(:comments, by) if counter.present?
   end
 
+  def increase_reports
+    counter.increment!(:reports)
+  end
+
+  def decrease_reports
+    counter.decrement!(:reports)
+  end
+
   def total_views
     counter.page_views + counter.view_increment
   end
