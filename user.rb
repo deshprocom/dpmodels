@@ -20,6 +20,9 @@
 
 # 用户信息表
 class User < ApplicationRecord
+  extend Geocoder::Model::ActiveRecord
+  reverse_geocoded_by :latitude, :longitude
+
   include UserFinders
   include UserUniqueValidator
   include UserNameGenerator
