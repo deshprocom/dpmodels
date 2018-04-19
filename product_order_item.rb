@@ -4,18 +4,17 @@ class ProductOrderItem < ApplicationRecord
   belongs_to :variant
   has_many :product_refund_details, dependent: :destroy
 
-  before_create :syn_variant
   serialize :sku_value, JSON
-
   REFUND_STATUSES = %w(none open close completed).freeze
   validates :refund_status, inclusion: { in: REFUND_STATUSES }
   # enum refund_status: { none_refund: 'none', open: 'open', close: 'close', 'completed': 'completed' }
 
   def syn_variant
-    self.product_id ||= variant.product_id
-    self.original_price ||= variant.original_price
-    self.price     ||= variant.price
-    self.sku_value ||= variant.text_sku_values
+    self.product_id     = variant.product_id
+    self.original_price = variant.original_price
+    self.price          = variant.price
+    self.sku_value      = variant.text_sku_values
+    self.seven_days_return = variant.product.seven_days_return
   end
 
   def open_refund
