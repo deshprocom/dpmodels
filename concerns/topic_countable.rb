@@ -51,6 +51,10 @@ module TopicCountable
   def total_comments
     counter.comments
   end
+
+  def total_reports
+    counter.reports
+  end
 end
 
 
