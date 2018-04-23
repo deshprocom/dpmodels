@@ -73,6 +73,12 @@ class User < ApplicationRecord
     save
   end
 
+  def touch_login_ip!(login_ip)
+    self.last_login_ip = current_login_ip
+    self.current_login_ip = login_ip
+    save
+  end
+
   # 上传图片给图片赋值的时候 创建图片路径
   def avatar=(value)
     super
