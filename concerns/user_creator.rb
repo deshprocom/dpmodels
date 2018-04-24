@@ -1,4 +1,5 @@
 # 创建用户生成器
+# rubocop:disable Metrics/MethodLength
 module UserCreator
   extend ActiveSupport::Concern
 
