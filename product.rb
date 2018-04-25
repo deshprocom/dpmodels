@@ -33,6 +33,10 @@ class Product < ApplicationRecord
     Category.decrement_counter(:products_count, category_id)
   end
 
+  before_save do
+    self.description = ActionController::Base.helpers.strip_tags(description)
+  end
+
   after_save :update_count_to_category
   def update_count_to_category
     return unless category_id_changed?
