@@ -8,6 +8,7 @@ class Reply < ApplicationRecord
   belongs_to :reply_user, class_name: 'User', primary_key: 'id', foreign_key: 'reply_user_id'
   include Typologicalable
   include UnscopeTopic
+  include TopicNotify
 
   default_scope { where(deleted: false) }
 

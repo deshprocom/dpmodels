@@ -4,4 +4,5 @@ class TopicLike < ApplicationRecord
   has_many :dynamics, as: :typological, dependent: :destroy
   include Typologicalable
   include UnscopeTopic
+  include TopicNotify
 end

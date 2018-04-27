@@ -6,6 +6,7 @@ class Comment < ApplicationRecord
   include Typologicalable
   include Recommendable
   include UnscopeTopic
+  include TopicNotify
 
   after_create do
     topic.increase_comments
